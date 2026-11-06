@@ -44,7 +44,8 @@ jobs:
       - run: corepack enable && corepack prepare pnpm@10.0.0 --activate
       - uses: foundry-rs/foundry-toolchain@v1
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter @agentpay/types build && pnpm --filter @agentpay/x402-escrow build
+      # Build the verifier together with its workspace dependencies, in order.
+      - run: pnpm --filter "@agentpay/x402-escrow..." --fail-if-no-match build
       - name: Contract behavior and negative boundaries (no external RPC)
         run: forge test --root contracts --no-match-path 'test/*Fork*.t.sol' -vv
       - name: Published ABI matches the freshly compiled contract

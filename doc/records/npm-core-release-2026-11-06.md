@@ -14,3 +14,12 @@
 This verifies public package consumption, not consumer upgrades, on-chain behavior,
 production readiness or trusted-publishing setup. Other workspace packages remain
 private; external repositories retain their existing dependencies until reviewed.
+
+## Documentation patch 0.14.2
+
+Owner execution published 0.14.2. Registry integrity matches archive SHA-256
+`c537593175253b66c32ce4f78048c712f1a3ddc10c848e578c8b0ff52bd41af5`.
+Separate public metadata verification confirmed `latest=0.14.2` and the registry
+README matches the revised package guide. Local independent tarball consumption
+passed before upload; archive comparison confirmed only README, CHANGELOG and
+package version changed from 0.14.1. No external consumer upgrade is implied.

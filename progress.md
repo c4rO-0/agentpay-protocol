@@ -1,14 +1,27 @@
 # AgentPay Protocol Progress
 
-## Documentation patch release prepared — 2026-11-06
+## Clean CI dependency build correction — 2026-11-06
+
+The chain job still selected the retired `@agentpay/types` name. pnpm skipped that
+unmatched filter, leaving the core unbuilt; TypeScript then failed in the verifier.
+The job now builds `@agentpay/x402-escrow...` with its workspace dependencies in
+order and fails on an unmatched selector. A clean temporary source checkout with
+no dist directories installed from the frozen lockfile and built both packages
+successfully. This resolves the module/type build failure; the complete Forge and
+Anvil CI job still needs its GitHub run. No protocol runtime or npm artifact change.
+
+
+## Documentation patch release verified — 2026-11-06
 
 Prepared `@c4roa0/agentpay-protocol@0.14.2` after reader-focused review of both
 homepages. Archive comparison against published 0.14.1 confirms only README,
 CHANGELOG and package version differ; all runtime/schema/ABI/fixture bytes match.
 Independent packed-consumer installation and two-payload public checks passed.
 Archive SHA-256: `c537593175253b66c32ce4f78048c712f1a3ddc10c848e578c8b0ff52bd41af5`.
-The owner approved publication; upload awaits terminal credential entry. Do not
-mark 0.14.2 published until registry verification passes. Consumers remain unchanged.
+Owner execution published 0.14.2 and verified registry integrity. A separate public
+metadata check confirmed latest=0.14.2 and the new README matches the reviewed
+archive. Consumers remain unchanged; next is their separately verified dependency
+upgrade. No chain or service deployment changed.
 
 
 ## README refresh — 2026-11-06

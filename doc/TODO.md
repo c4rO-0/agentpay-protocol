@@ -1,10 +1,16 @@
 # AgentPay Protocol TODO
 
+## CI package rename follow-up
+
+- [x] Fix chain-job dependency build and verify from a clean checkout without dist files.
+- [ ] Confirm the complete GitHub chain job after pushing the workflow correction.
+
+
 ## Package documentation follow-up
 
 - [x] Rewrite npm/GitHub homepages, retain API notes, verify links and runnable examples.
 - [x] Prepare and verify documentation-only 0.14.2; owner approved publication.
-- [ ] Publish 0.14.2 and verify registry integrity; terminal credential entry remains.
+- [x] Publish 0.14.2 and verify registry integrity, latest tag and new README.
 
 
 ## Community readiness polish — 2026-11-06
