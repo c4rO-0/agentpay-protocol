@@ -1,0 +1,316 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentpay.dev/schemas/agentpay-dispute-case-v1.schema.json",
+  "title": "AgentPay participant dispute case v1",
+  "type": "object",
+  "required": [
+    "version",
+    "orderId",
+    "state",
+    "financialState",
+    "confirmed",
+    "revision",
+    "schedule",
+    "reason",
+    "verdict",
+    "review",
+    "evidence",
+    "events",
+    "canOpen",
+    "canWithdraw",
+    "canSubmitEvidence"
+  ],
+  "properties": {
+    "version": {
+      "const": "agentpay.dispute-case.v1"
+    },
+    "orderId": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "state": {
+      "enum": [
+        "not_open",
+        "collecting",
+        "reviewing",
+        "human",
+        "human_overdue",
+        "withdrawn",
+        "resolved",
+        "settled"
+      ]
+    },
+    "financialState": {
+      "enum": [
+        "Uninitialized",
+        "Created",
+        "Funded",
+        "Delivered",
+        "Released",
+        "Refunded",
+        "Cancelled"
+      ]
+    },
+    "confirmed": {
+      "type": "boolean"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "schedule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "submissionAtMs",
+        "evidenceAtMs",
+        "humanAtMs",
+        "decisionAtMs",
+        "releaseAtMs"
+      ],
+      "properties": {
+        "submissionAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799999
+        },
+        "evidenceAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799999
+        },
+        "humanAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799999
+        },
+        "decisionAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799999
+        },
+        "releaseAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799999
+        },
+        "refundAvailableAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799999
+        }
+      }
+    },
+    "reason": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 8192
+    },
+    "verdict": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outcome",
+            "reason",
+            "atMs",
+            "actor"
+          ],
+          "properties": {
+            "outcome": {
+              "enum": [
+                "release",
+                "refund"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 4096,
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "atMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 253402300799999
+            },
+            "actor": {
+              "type": "string",
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          }
+        }
+      ]
+    },
+    "review": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outcome",
+            "reason"
+          ],
+          "properties": {
+            "outcome": {
+              "enum": [
+                "release",
+                "refund",
+                "manual"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 4096,
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          }
+        }
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "role",
+          "atMs",
+          "text",
+          "links",
+          "attachments"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^0x[0-9a-f]{64}$"
+          },
+          "role": {
+            "enum": [
+              "buyer",
+              "provider"
+            ]
+          },
+          "atMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 253402300799999
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 32768,
+            "minLength": 0
+          },
+          "links": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "string",
+              "maxLength": 2048,
+              "minLength": 0,
+              "pattern": "^https://"
+            }
+          },
+          "attachments": {
+            "type": "array",
+            "maxItems": 3,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "mimeType",
+                "dataBase64"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "maxLength": 120,
+                  "minLength": 0
+                },
+                "mimeType": {
+                  "enum": [
+                    "image/png",
+                    "image/jpeg",
+                    "image/webp"
+                  ]
+                },
+                "dataBase64": {
+                  "type": "string",
+                  "maxLength": 1398104,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9+/]+={0,2}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "maxItems": 512,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "atMs",
+          "actor"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1
+          },
+          "atMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 253402300799999
+          },
+          "actor": {
+            "type": "string",
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "outcome": {
+            "enum": [
+              "release",
+              "refund",
+              "manual"
+            ]
+          },
+          "evidenceId": {
+            "type": "string",
+            "pattern": "^0x[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "canOpen": {
+      "type": "boolean"
+    },
+    "canWithdraw": {
+      "type": "boolean"
+    },
+    "canSubmitEvidence": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

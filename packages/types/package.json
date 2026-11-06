@@ -1,0 +1,50 @@
+{
+  "name": "@agentpay/types",
+  "version": "0.14.1",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./schema": "./schemas/agentpay-x402-escrow-v1.schema.json",
+    "./agentpay-safe-module-schema": "./schemas/agentpay-safe-module-v1.schema.json",
+    "./authority-controller-deployment-schema": "./schemas/settlement-authority-controller-deployment-v1.schema.json",
+    "./native-service-schema": "./schemas/agentpay-native-service-v1.schema.json",
+    "./service-payment-required-schema": "./schemas/agentpay-service-payment-required-v1.schema.json",
+    "./service-profile-schema": "./schemas/agentpay-service-profile-v1.schema.json",
+    "./participant-order-v2-schema": "./schemas/agentpay-participant-order-v2.schema.json",
+    "./finalization-disclosure-v2-schema": "./schemas/agentpay-finalization-disclosure-v2.schema.json",
+    "./order-deadlines-v2-schema": "./schemas/agentpay-order-deadlines-v2.schema.json",
+    "./service-authorization-v2-schema": "./schemas/agentpay-service-authorization-v2.schema.json",
+    "./wallet-notice-v2-schema": "./schemas/agentpay-wallet-notice-v2.schema.json",
+    "./delivery-result-v2-schema": "./schemas/agentpay-delivery-result-v2.schema.json",
+    "./service-invocation-schema": "./schemas/agentpay-service-invocation-v1.schema.json",
+    "./service-reference-schema": "./schemas/agentpay-service-reference-v1.schema.json",
+    "./service-result-schema": "./schemas/agentpay-service-result-v1.schema.json",
+    "./order-waiting-v1-schema": "./schemas/agentpay-order-waiting-v1.schema.json",
+    "./order-closure-v1-schema": "./schemas/agentpay-order-closure-v1.schema.json",
+    "./dispute-case-schema": "./schemas/agentpay-dispute-case-v1.schema.json"
+  },
+  "files": [
+    "dist",
+    "schemas",
+    "fixtures",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "pnpm build && node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "viem": "^2.46.3"
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0",
+    "typescript": "^5.9.2"
+  }
+}

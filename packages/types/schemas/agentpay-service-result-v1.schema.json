@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentpay.dev/schemas/agentpay-service-result-v1.schema.json",
+  "title": "AgentPay JSON service result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "orderId",
+    "requestHash",
+    "output",
+    "outputHash",
+    "usageUnits"
+  ],
+  "properties": {
+    "version": {
+      "const": "agentpay.service-result.v1"
+    },
+    "orderId": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "requestHash": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "output": {},
+    "outputHash": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "usageUnits": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,76})$"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@agentpay/x402-escrow",
+  "version": "0.4.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "README.md", "CHANGELOG.md"],
+  "exports": { ".": "./dist/index.js", "./cdp": "./dist/cdp.js", "./mock": "./dist/mock.js" },
+  "scripts": { "build": "tsc -p tsconfig.json", "test": "pnpm build && node --test test/*.test.mjs" },
+  "dependencies": {
+    "@agentpay/types": "workspace:*",
+    "@coinbase/cdp-sdk": "^1.55.0"
+  },
+  "devDependencies": { "typescript": "^5.9.2" }
+}

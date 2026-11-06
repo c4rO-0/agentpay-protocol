@@ -1,0 +1,19 @@
+{
+  "legacy": {
+    "deliveryDueAt": "2026-09-27T09:10:00.000Z",
+    "chainDeliveryDueAt": "2026-09-27T09:11:00.000Z",
+    "refundAvailableAt": "2026-09-27T09:22:00.000Z",
+    "providerResponseDueAt": "2026-09-27T09:01:00.000Z",
+    "chainMarginMs": 60000,
+    "deadlinePolicyVersion": "agentpay.order-deadlines.v1"
+  },
+  "v2": {
+    "chainMarginMs": 60000,
+    "deadlinePolicyVersion": "agentpay.order-deadlines.v1",
+    "version": "agentpay.order-deadlines.v2",
+    "deliveryDueAtMs": 1790500200000,
+    "chainDeliveryDueAtMs": 1790500260000,
+    "refundAvailableAtMs": 1790500920000,
+    "providerResponseDueAtMs": 1790499660000
+  }
+}

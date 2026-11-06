@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentpay.dev/schemas/agentpay-service-reference-v1.schema.json",
+  "title": "AgentPay registered service reference",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "skillId",
+    "profileHash",
+    "profile",
+    "adapter"
+  ],
+  "properties": {
+    "version": {
+      "const": "agentpay.service-reference.v1"
+    },
+    "skillId": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "profileHash": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "profile": {
+      "$ref": "https://agentpay.dev/schemas/agentpay-service-profile-v1.schema.json"
+    },
+    "adapter": {
+      "enum": [
+        "agentpay.json.v1"
+      ]
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentpay.dev/schema/agentpay-wallet-notice-v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "noticeId",
+    "orderId",
+    "type",
+    "state",
+    "payload"
+  ],
+  "properties": {
+    "version": {
+      "const": "agentpay.wallet-notice.v2"
+    },
+    "noticeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "orderId": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "type": {
+      "const": "delivery_confirmation_required"
+    },
+    "state": {
+      "enum": [
+        "created",
+        "delivered",
+        "acknowledged"
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "orderId",
+        "outputHash",
+        "actions",
+        "releaseScheduledAtMs"
+      ],
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "pattern": "^0x[0-9a-f]{64}$"
+        },
+        "outputHash": {
+          "type": "string",
+          "pattern": "^0x[0-9a-f]{64}$"
+        },
+        "releaseScheduledAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799999
+        },
+        "actions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "confirm_received",
+              "open_dispute"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

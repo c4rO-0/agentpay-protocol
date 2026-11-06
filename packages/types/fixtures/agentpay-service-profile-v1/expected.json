@@ -1,0 +1,4 @@
+{
+  "canonicalProfile": "{\"asset\":\"0x2000000000000000000000000000000000000002\",\"mcpEndpoint\":\"http://127.0.0.1:6571/services/service.agentpay.random/mcp/invoke\",\"network\":\"eip155:31337\",\"paymentEndpoint\":\"http://127.0.0.1:6571/services/service.agentpay.random/agentpay/invoke\",\"providerId\":\"provider:market:sample\",\"seller\":\"0x1000000000000000000000000000000000000001\",\"serviceId\":\"service.agentpay.random\",\"version\":\"agentpay.service-profile.v1\"}",
+  "profileHash": "0x72f45de68ef3297d6a91ad4c0215e07cf2705f28e700479e7a824ddbbf119a00"
+}

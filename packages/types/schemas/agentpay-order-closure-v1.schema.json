@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentPay Order closure v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": "agentpay.order-closure.v1"
+    },
+    "state": {
+      "enum": [
+        "requested",
+        "cancelling",
+        "refunding",
+        "cancelled",
+        "refunded"
+      ]
+    },
+    "reason": {
+      "enum": [
+        "user_cancel",
+        "payment_timeout",
+        "provider_response_timeout"
+      ]
+    },
+    "requestedAtMs": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 253402300799999
+    },
+    "completedAtMs": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 253402300799999
+    },
+    "transactionHash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^0x[0-9a-fA-F]{64}$"
+    },
+    "errorCode": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Z][A-Z0-9_]{0,95}$"
+    }
+  },
+  "required": [
+    "version",
+    "state",
+    "reason",
+    "requestedAtMs",
+    "completedAtMs",
+    "transactionHash",
+    "errorCode"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "enum": [
+              "cancelled",
+              "refunded"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "completedAtMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 253402300799999
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "completedAtMs": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "refunded"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "transactionHash": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{64}$"
+          }
+        }
+      }
+    }
+  ]
+}

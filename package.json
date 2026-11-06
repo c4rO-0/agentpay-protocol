@@ -1,0 +1,63 @@
+{
+  "name": "agentpay-protocol",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "packageManager": "pnpm@10.0.0",
+  "description": "AgentPay Protocol MVP monorepo",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "contracts:deploy:metamask-page": "node scripts/build-metamask-deploy-page.mjs",
+    "server:dev": "pnpm --filter @agentpay/server dev",
+    "deal-demo:settlement:dev": "pnpm --filter @agentpay/server deal-demo:settlement:dev",
+    "deal-demo:mcp:dev": "pnpm --filter @agentpay/server deal-demo:mcp:dev",
+    "conformance:test": "pnpm test:packages",
+    "build": "pnpm -r build",
+    "test": "pnpm test:packages",
+    "deal-demo:verify": "node scripts/verify-deal-demo.mjs",
+    "dealmanager:verify:safe": "bash scripts/verify-safe-dealmanager.sh",
+    "safe:bind:prepare": "node scripts/prepare-safe-bind.mjs",
+    "safe:bind:payloads": "node scripts/prepare-safe-bind.mjs",
+    "safe:bind:verify:eoa": "node scripts/verify-safe-bind.mjs",
+    "safe:bind:verify:safe": "node scripts/prepare-safe-bind.mjs",
+    "contracts:deploy:safe:record": "node scripts/record-dealmanager-deployment.mjs",
+    "safe:bind:runner-page": "node scripts/build-safe-bind-runner-page.mjs",
+    "allowance:pull:prepare": "node scripts/prepare-allowance-pull.mjs",
+    "real-random-deal:prepare": "node scripts/prepare-real-random-deal.mjs",
+    "real-random-deal:settle": "node scripts/settle-real-random-deal.mjs",
+    "real-random-deal:release": "node scripts/release-real-deal.mjs",
+    "real-random-deal:refund": "node scripts/refund-real-deal.mjs",
+    "real-random-deal:chargeback": "node scripts/chargeback-real-deal.mjs",
+    "real-random-deal:settle:release-only": "SETTLE_SKIP_PAYOUT=1 node scripts/settle-real-random-deal.mjs",
+    "x402:verify-contract-payto": "node scripts/x402-verify-contract-payto.mjs",
+    "x402:escrow:smoke-page": "node scripts/build-x402-escrow-smoke-page.mjs",
+    "x402:escrow:record": "node scripts/record-x402-escrow-smoke.mjs",
+    "x402:escrow:settle-smoke": "node scripts/x402-settle-escrow-smoke.mjs",
+    "x402:reference": "bash scripts/run-x402-local-reference.sh",
+    "x402:deployment:solc-input": "node scripts/x402-solc-input.mjs",
+    "x402:deployment:verify": "node scripts/verify-x402-deployment.mjs",
+    "x402:mechanism-dispatch:probe": "node scripts/x402-mechanism-dispatch-probe.mjs",
+    "artifacts:pack:settlement": "bash scripts/pack-settlement-artifacts.sh",
+    "test:packages": "pnpm build && pnpm --filter @agentpay/types exec node --test test/*.test.mjs && pnpm --filter @agentpay/x402-escrow exec node --test test/*.test.mjs && pnpm --filter @agentpay/server test && node scripts/test-package-consumer.mjs",
+    "test:chain": "forge test --root contracts --no-match-path \"test/*Fork*.t.sol\" -vv && node --test scripts/test/controller-artifact.test.mjs && node scripts/test-native-lifecycle.mjs"
+  },
+  "dependencies": {
+    "@coinbase/cdp-sdk": "^1.55.0",
+    "@safe-global/api-kit": "^4.0.1",
+    "@safe-global/protocol-kit": "^6.1.2",
+    "@safe-global/sdk-starter-kit": "^3.0.2",
+    "@safe-global/types-kit": "^3.0.0",
+    "@x402/core": "2.21.0",
+    "@x402/evm": "2.21.0",
+    "@x402/extensions": "2.21.0",
+    "@x402/svm": "2.21.0",
+    "buffer": "^6.0.3",
+    "process": "^0.11.10",
+    "viem": "^2.21.57"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.4"
+  }
+}

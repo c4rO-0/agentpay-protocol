@@ -1,0 +1,56 @@
+{
+  "protocol": "agentpay.settlement-authority-controller.v1",
+  "abiVersion": "1.0.0",
+  "functions": [
+    "administrator",
+    "cancelUnfunded",
+    "executor",
+    "factory",
+    "isApprovedVault",
+    "pause",
+    "paused",
+    "refund",
+    "release",
+    "setExecutor",
+    "submitDelivery",
+    "unpause"
+  ],
+  "events": [
+    "CancellationForwarded",
+    "DeliveryForwarded",
+    "ExecutorUpdated",
+    "Paused",
+    "RefundForwarded",
+    "ReleaseForwarded",
+    "Unpaused"
+  ],
+  "forbiddenFunctions": ["activate", "batch", "call", "delegatecall", "execute", "upgradeTo"],
+  "deployment": {
+    "schema": "agentpay.settlement-authority-controller-deployment.v1",
+    "status": "candidate",
+    "protocol": "agentpay.settlement-authority-controller.v1",
+    "abiVersion": "1.0.0",
+    "chainId": "31337",
+    "network": "eip155:31337",
+    "controllerAddress": "0x1111111111111111111111111111111111111111",
+    "administratorSafe": "0x2222222222222222222222222222222222222222",
+    "factoryAddress": "0x3333333333333333333333333333333333333333",
+    "initialExecutor": "0x4444444444444444444444444444444444444444",
+    "sourceCommit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "deploymentTxHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "deploymentBlockNumber": "1",
+    "deployedAt": "2026-09-16T00:00:00Z",
+    "compiler": {
+      "solc": "0.8.24",
+      "optimizer": true,
+      "optimizerRuns": 200,
+      "viaIR": true,
+      "evmVersion": "cancun"
+    },
+    "bytecode": {
+      "creationKeccak256": "0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "runtimeKeccak256": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    "auditStatus": "not-audited"
+  }
+}

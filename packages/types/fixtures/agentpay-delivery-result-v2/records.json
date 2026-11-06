@@ -1,0 +1,48 @@
+{
+  "confirmationLegacy": {
+    "orderId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+    "duplicate": false,
+    "confirmedAt": "2026-09-27T09:02:00.000Z",
+    "releaseDueAt": "2026-09-27T09:03:00.000Z"
+  },
+  "confirmationV2": {
+    "orderId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+    "duplicate": false,
+    "version": "agentpay.delivery-result.v2",
+    "confirmedAtMs": 1790499720000,
+    "releaseDueAtMs": 1790499780000
+  },
+  "receiptLegacy": {
+    "orderId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+    "receiptId": "receipt_fixture",
+    "authorizationId": "asa_fixture",
+    "duplicate": false,
+    "deliveryJobId": "job_fixture",
+    "reminderDueAt": "2026-09-27T09:05:00.000Z",
+    "releaseDueAt": "2026-09-27T09:10:00.000Z",
+    "billing": {
+      "usageUnits": "1",
+      "finalChargeAtomic": "700000",
+      "sellerAmountAtomic": "665000",
+      "feeAmountAtomic": "35000",
+      "buyerReturnAmountAtomic": "0"
+    }
+  },
+  "receiptV2": {
+    "orderId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+    "receiptId": "receipt_fixture",
+    "authorizationId": "asa_fixture",
+    "duplicate": false,
+    "deliveryJobId": "job_fixture",
+    "billing": {
+      "usageUnits": "1",
+      "finalChargeAtomic": "700000",
+      "sellerAmountAtomic": "665000",
+      "feeAmountAtomic": "35000",
+      "buyerReturnAmountAtomic": "0"
+    },
+    "version": "agentpay.delivery-result.v2",
+    "releaseDueAtMs": 1790500200000,
+    "reminderDueAtMs": 1790499900000
+  }
+}

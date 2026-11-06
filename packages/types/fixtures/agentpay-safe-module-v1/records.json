@@ -1,0 +1,129 @@
+{
+  "qualification": {
+    "registry": "0x9000000000000000000000000000000000000009",
+    "skillId": "0x2222222222222222222222222222222222222222222222222222222222222222",
+    "profileHash": "0x3333333333333333333333333333333333333333333333333333333333333333",
+    "seller": "0x6000000000000000000000000000000000000006"
+  },
+  "qualificationHash": "0x376235a8bdd29a005aff75e66645f8df433b41c317c2ee722ac522bbf69ac8c9",
+  "spendingPolicy": {
+    "policyId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+    "delegate": "0x8fd379246834eac74B8419FfdA202CF8051F7A03",
+    "token": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "factory": "0x3000000000000000000000000000000000000003",
+    "registry": "0x9000000000000000000000000000000000000009",
+    "maxPerPayment": "2000",
+    "totalBudget": "5000",
+    "validAfter": "1700000000",
+    "validUntil": "1800003600"
+  },
+  "requirements": {
+    "scheme": "agentpay",
+    "network": "eip155:8453",
+    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "amount": "1000",
+    "payTo": "0x5000000000000000000000000000000000000005",
+    "maxTimeoutSeconds": 300,
+    "extra": {
+      "binding": "agentpay.safe-module.v1",
+      "paymentFlow": "escrow",
+      "module": "0x4000000000000000000000000000000000000004",
+      "safe": "0x1000000000000000000000000000000000000001",
+      "policyId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+      "factory": "0x3000000000000000000000000000000000000003",
+      "orderId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "termsHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "scopeProofHash": "0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  },
+  "paymentPayload": {
+    "x402Version": 2,
+    "accepted": {
+      "scheme": "agentpay",
+      "network": "eip155:8453",
+      "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "amount": "1000",
+      "payTo": "0x5000000000000000000000000000000000000005",
+      "maxTimeoutSeconds": 300,
+      "extra": {
+        "binding": "agentpay.safe-module.v1",
+        "paymentFlow": "escrow",
+        "module": "0x4000000000000000000000000000000000000004",
+        "safe": "0x1000000000000000000000000000000000000001",
+        "policyId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+        "factory": "0x3000000000000000000000000000000000000003",
+        "orderId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "termsHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "scopeProofHash": "0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    },
+    "payload": {
+      "commitment": {
+        "binding": "agentpay.safe-module.v1",
+        "safe": "0x1000000000000000000000000000000000000001",
+        "policyId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+        "factory": "0x3000000000000000000000000000000000000003",
+        "orderId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "vault": "0x5000000000000000000000000000000000000005",
+        "token": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+        "amount": "1000",
+        "termsHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "scopeProofHash": "0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "commitmentNonce": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "validBefore": "1800000000"
+      },
+      "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    }
+  },
+  "policy": {
+    "active": true,
+    "delegate": "0x8fd379246834eac74B8419FfdA202CF8051F7A03",
+    "safe": "0x1000000000000000000000000000000000000001",
+    "policyId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+    "module": "0x4000000000000000000000000000000000000004",
+    "factory": "0x3000000000000000000000000000000000000003",
+    "token": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "maxPerPayment": "2000",
+    "remainingBudget": "5000",
+    "validAfter": "1700000000",
+    "validUntil": "1800003600"
+  },
+  "verifyResponse": {
+    "isValid": true,
+    "payer": "0x1000000000000000000000000000000000000001",
+    "extensions": {
+      "agentpay": {
+        "binding": "agentpay.safe-module.v1",
+        "paymentFlow": "escrow",
+        "commitmentId": "0x8b08a80f5d4c13f82916b1860b6e1e4761e5b0e48e16d9bba1eb9111677b9052",
+        "orderId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "vault": "0x5000000000000000000000000000000000000005"
+      }
+    }
+  },
+  "acceptance": {
+    "schema": "agentpay.commitment-acceptance.v1",
+    "accepted": true,
+    "commitmentId": "0x8b08a80f5d4c13f82916b1860b6e1e4761e5b0e48e16d9bba1eb9111677b9052",
+    "orderId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "status": "accepted",
+    "acceptedAt": "2026-09-09T00:00:00.000Z"
+  },
+  "settleResponse": {
+    "success": true,
+    "payer": "0x1000000000000000000000000000000000000001",
+    "transaction": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "network": "eip155:8453",
+    "amount": "1000",
+    "extensions": {
+      "agentpay": {
+        "binding": "agentpay.safe-module.v1",
+        "paymentFlow": "escrow",
+        "commitmentId": "0x8b08a80f5d4c13f82916b1860b6e1e4761e5b0e48e16d9bba1eb9111677b9052",
+        "orderId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "vault": "0x5000000000000000000000000000000000000005",
+        "fundingEvidence": "confirmed"
+      }
+    }
+  }
+}

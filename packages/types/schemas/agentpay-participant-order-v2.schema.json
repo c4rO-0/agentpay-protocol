@@ -1,0 +1,283 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentpay.dev/schema/agentpay-participant-order-v2.schema.json",
+  "title": "AgentPay participant Order projections with integer milliseconds",
+  "$defs": {
+    "ParticipantOrderCore": {
+      "type": "object",
+      "required": [
+        "version",
+        "role",
+        "orderId",
+        "orderStatus",
+        "vaultAddress",
+        "vaultState",
+        "chainId",
+        "assetAddress",
+        "prepaidAmountAtomic",
+        "basePriceAtomic",
+        "unitPriceAtomic",
+        "maxUsageUnits",
+        "maxFeeAmountAtomic",
+        "skillId",
+        "profileHash",
+        "providerId",
+        "requestHash",
+        "expiresAt",
+        "refundAvailableAt",
+        "createdAtMs",
+        "updatedAtMs",
+        "serviceState",
+        "providerResponseDueAtMs",
+        "usageUnits",
+        "settlementTransactionHash"
+      ],
+      "properties": {
+        "version": {
+          "const": "agentpay.participant-order.v2"
+        },
+        "role": {
+          "enum": [
+            "buyer",
+            "provider"
+          ]
+        },
+        "orderId": {
+          "$ref": "#/$defs/Bytes32"
+        },
+        "orderStatus": {
+          "enum": [
+            "Created",
+            "Funding",
+            "Funded",
+            "ServiceReady",
+            "Accepted",
+            "Rejected",
+            "Delivered",
+            "ReleasePending",
+            "Released",
+            "RefundPending",
+            "Refunded",
+            "Disputed",
+            "Failed"
+          ]
+        },
+        "vaultAddress": {
+          "$ref": "#/$defs/Address"
+        },
+        "vaultState": {
+          "enum": [
+            "Created",
+            "Funded",
+            "Delivered",
+            "Released",
+            "Refunded",
+            "Cancelled"
+          ]
+        },
+        "chainId": {
+          "$ref": "#/$defs/Uint"
+        },
+        "assetAddress": {
+          "$ref": "#/$defs/Address"
+        },
+        "prepaidAmountAtomic": {
+          "$ref": "#/$defs/Uint"
+        },
+        "basePriceAtomic": {
+          "$ref": "#/$defs/Uint"
+        },
+        "unitPriceAtomic": {
+          "$ref": "#/$defs/Uint"
+        },
+        "maxUsageUnits": {
+          "$ref": "#/$defs/Uint"
+        },
+        "maxFeeAmountAtomic": {
+          "$ref": "#/$defs/Uint"
+        },
+        "skillId": {
+          "$ref": "#/$defs/Bytes32"
+        },
+        "profileHash": {
+          "$ref": "#/$defs/Bytes32"
+        },
+        "providerId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requestHash": {
+          "$ref": "#/$defs/Bytes32"
+        },
+        "expiresAt": {
+          "$ref": "#/$defs/UnixSeconds"
+        },
+        "refundAvailableAt": {
+          "$ref": "#/$defs/UnixSeconds"
+        },
+        "serviceState": {
+          "enum": [
+            "unavailable",
+            "ready",
+            "claimed",
+            "accepted",
+            "rejected",
+            "delivered",
+            "closed"
+          ]
+        },
+        "usageUnits": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Uint"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "settlementTransactionHash": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bytes32"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "createdAtMs": {
+          "$ref": "#/$defs/UnixMilliseconds"
+        },
+        "updatedAtMs": {
+          "$ref": "#/$defs/UnixMilliseconds"
+        },
+        "providerResponseDueAtMs": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UnixMilliseconds"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "BuyerOrderProjection": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ParticipantOrderCore"
+        },
+        {
+          "type": "object",
+          "required": [
+            "buyerAddress",
+            "sellerAmountAtomic",
+            "feeAmountAtomic",
+            "buyerRefundAmountAtomic"
+          ],
+          "properties": {
+            "role": {
+              "const": "buyer"
+            },
+            "buyerAddress": {
+              "$ref": "#/$defs/Address"
+            },
+            "sellerAmountAtomic": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Uint"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "feeAmountAtomic": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Uint"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "buyerRefundAmountAtomic": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Uint"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "ProviderOrderProjection": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ParticipantOrderCore"
+        },
+        {
+          "type": "object",
+          "required": [
+            "sellerAddress"
+          ],
+          "properties": {
+            "role": {
+              "const": "provider"
+            },
+            "sellerAddress": {
+              "$ref": "#/$defs/Address"
+            },
+            "providerResponseDueAtMs": {
+              "$ref": "#/$defs/UnixMilliseconds"
+            },
+            "serviceState": {
+              "enum": [
+                "ready",
+                "claimed",
+                "accepted",
+                "rejected",
+                "delivered",
+                "closed"
+              ]
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Address": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "Bytes32": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "Uint": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)$"
+    },
+    "UnixMilliseconds": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 253402300799999,
+      "description": "Epoch milliseconds, never seconds or calendar text."
+    },
+    "UnixSeconds": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,10}|1[0-9]{11}|2[0-4][0-9]{10}|25[0-2][0-9]{9}|253[0-3][0-9]{8}|25340[0-1][0-9]{6}|253402[0-2][0-9]{5}|253402300[0-6][0-9]{2}|2534023007[0-8][0-9]{1}|25340230079[0-8]|253402300799)$",
+      "description": "Canonical epoch seconds, range 0..253402300799; preserves existing chain units."
+    }
+  }
+}

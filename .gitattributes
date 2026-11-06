@@ -1,0 +1,9 @@
+/deployments export-ignore
+/.env export-ignore
+/.env.* export-ignore
+/.tools export-ignore
+/node_modules export-ignore
+/contracts/cache export-ignore
+/contracts/out export-ignore
+/coverage export-ignore
+/dist export-ignore

@@ -1,0 +1,16 @@
+{
+  "name": "@agentpay/x402-reference",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "node --check src/service.mjs && node --check src/runner.mjs",
+    "start": "node src/runner.mjs"
+  },
+  "dependencies": {
+    "@agentpay/types": "workspace:*",
+    "@agentpay/x402-escrow": "workspace:*",
+    "viem": "^2.46.3"
+  }
+}

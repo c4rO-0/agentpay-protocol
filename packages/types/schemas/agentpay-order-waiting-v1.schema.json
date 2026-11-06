@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentPay Order waiting deadlines v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "paymentDueAtMs",
+    "providerResponseWindowMs",
+    "fundingConfirmedAtMs",
+    "providerResponseDueAtMs"
+  ],
+  "properties": {
+    "version": {
+      "const": "agentpay.order-waiting.v1"
+    },
+    "paymentDueAtMs": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 253402300799999
+    },
+    "providerResponseWindowMs": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 253402300799999
+    },
+    "fundingConfirmedAtMs": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 253402300799999
+    },
+    "providerResponseDueAtMs": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 253402300799999
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "fundingConfirmedAtMs": {
+          "type": "null"
+        },
+        "providerResponseDueAtMs": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "properties": {
+        "fundingConfirmedAtMs": {
+          "type": "integer"
+        },
+        "providerResponseDueAtMs": {
+          "type": "integer"
+        }
+      }
+    }
+  ]
+}

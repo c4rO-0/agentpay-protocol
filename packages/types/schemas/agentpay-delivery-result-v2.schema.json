@@ -1,0 +1,288 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentpay.dev/schema/agentpay-delivery-result-v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "orderId",
+    "duplicate"
+  ],
+  "properties": {
+    "version": {
+      "const": "agentpay.delivery-result.v2"
+    },
+    "orderId": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "duplicate": {
+      "type": "boolean"
+    },
+    "receiptId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authorizationId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "deliveryJobId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "billing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "usageUnits",
+        "finalChargeAtomic",
+        "sellerAmountAtomic",
+        "feeAmountAtomic",
+        "buyerReturnAmountAtomic"
+      ],
+      "properties": {
+        "usageUnits": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "finalChargeAtomic": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "sellerAmountAtomic": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "feeAmountAtomic": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "buyerReturnAmountAtomic": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        }
+      }
+    },
+    "confirmedAtMs": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 253402300799999
+    },
+    "reminderDueAtMs": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 253402300799999
+    },
+    "releaseDueAtMs": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 253402300799999
+    },
+    "deadlines": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "finalizationPolicy": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "finalization": {
+      "type": [
+        "object",
+        "null"
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "required": [
+        "receiptId",
+        "billing"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "duplicate": {
+                "const": false
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "deliveryJobId",
+              "reminderDueAtMs",
+              "releaseDueAtMs"
+            ],
+            "properties": {
+              "deliveryJobId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reminderDueAtMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 253402300799999
+              },
+              "releaseDueAtMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 253402300799999
+              }
+            }
+          }
+        }
+      ],
+      "dependentRequired": {
+        "reminderDueAtMs": [
+          "releaseDueAtMs"
+        ],
+        "releaseDueAtMs": [
+          "reminderDueAtMs"
+        ]
+      },
+      "properties": {
+        "version": {
+          "const": "agentpay.delivery-result.v2"
+        },
+        "orderId": {
+          "type": "string",
+          "pattern": "^0x[0-9a-f]{64}$"
+        },
+        "duplicate": {
+          "type": "boolean"
+        },
+        "receiptId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authorizationId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deliveryJobId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "billing": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "usageUnits",
+            "finalChargeAtomic",
+            "sellerAmountAtomic",
+            "feeAmountAtomic",
+            "buyerReturnAmountAtomic"
+          ],
+          "properties": {
+            "usageUnits": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$"
+            },
+            "finalChargeAtomic": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$"
+            },
+            "sellerAmountAtomic": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$"
+            },
+            "feeAmountAtomic": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$"
+            },
+            "buyerReturnAmountAtomic": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$"
+            }
+          }
+        },
+        "confirmedAtMs": false,
+        "reminderDueAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799999
+        },
+        "releaseDueAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799999
+        },
+        "deadlines": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "finalizationPolicy": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "finalization": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      }
+    },
+    {
+      "required": [
+        "confirmedAtMs",
+        "releaseDueAtMs"
+      ],
+      "properties": {
+        "version": {
+          "const": "agentpay.delivery-result.v2"
+        },
+        "orderId": {
+          "type": "string",
+          "pattern": "^0x[0-9a-f]{64}$"
+        },
+        "duplicate": {
+          "type": "boolean"
+        },
+        "receiptId": false,
+        "authorizationId": false,
+        "deliveryJobId": false,
+        "billing": false,
+        "confirmedAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799999
+        },
+        "reminderDueAtMs": false,
+        "releaseDueAtMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 253402300799999
+        },
+        "deadlines": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "finalizationPolicy": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "finalization": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      }
+    }
+  ]
+}

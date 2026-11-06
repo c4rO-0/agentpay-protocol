@@ -1,0 +1,29 @@
+{
+  "schema": "agentpay.x402-escrow-deployment.v1",
+  "status": "canonical",
+  "protocol": "agentpay.x402.escrow.v1",
+  "schemaVersion": "1.0.0",
+  "abiVersion": "1.0.0",
+  "chainId": "8453",
+  "network": "eip155:8453",
+  "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+  "factoryAddress": "0x0060FC1912872f4f65D33eE952FD88eB1C10F794",
+  "implementationAddress": "0x3E7532127da773D358e431eFE57aF56E35888A08",
+  "factorySourceCommit": "3cb7451280428f5e875bfd5183f169d971a678b5",
+  "deploymentTxHash": "0x9bd3d4a7b110a833bbc4372855908c004a0a96450068dc0bc5aac3ff769b60f6",
+  "deploymentBlockNumber": "49920106",
+  "deployedAt": "2026-08-13T13:59:19.000Z",
+  "compiler": {
+    "solc": "0.8.24",
+    "optimizer": true,
+    "optimizerRuns": 200,
+    "viaIR": true,
+    "evmVersion": "cancun"
+  },
+  "bytecode": {
+    "factoryCreationKeccak256": "0x1199c2f99a139968707c6f9b3721bc86f2ce06f9fbd2342c3d34a0abeebe56f3",
+    "factoryRuntimeKeccak256": "0xe6dc351979753479eba25f45feeeb5cca8834b7d211642579919e78569a590a9",
+    "implementationRuntimeKeccak256": "0xed1e383b62631ad2c197457e0c02949cdaddc5384903550acfe095e37b1c4a97"
+  },
+  "auditStatus": "not-audited"
+}

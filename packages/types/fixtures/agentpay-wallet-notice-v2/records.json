@@ -1,0 +1,33 @@
+{
+  "legacy": {
+    "noticeId": "awn_fixture",
+    "orderId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+    "type": "delivery_confirmation_required",
+    "state": "delivered",
+    "payload": {
+      "orderId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+      "outputHash": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "actions": [
+        "confirm_received",
+        "open_dispute"
+      ],
+      "releaseScheduledAt": "2026-09-27T09:10:00.000Z"
+    }
+  },
+  "v2": {
+    "noticeId": "awn_fixture",
+    "orderId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+    "type": "delivery_confirmation_required",
+    "state": "delivered",
+    "payload": {
+      "orderId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+      "outputHash": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "actions": [
+        "confirm_received",
+        "open_dispute"
+      ],
+      "releaseScheduledAtMs": 1790500200000
+    },
+    "version": "agentpay.wallet-notice.v2"
+  }
+}

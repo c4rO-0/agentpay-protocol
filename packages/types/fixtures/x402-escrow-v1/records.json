@@ -1,0 +1,85 @@
+{
+  "paymentRequired": {
+    "scheme": "exact",
+    "network": "eip155:8453",
+    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "amount": "1000",
+    "payTo": "0x6666666666666666666666666666666666666666",
+    "maxTimeoutSeconds": 300,
+    "extra": { "name": "USD Coin", "version": "2" },
+    "extensions": {
+      "agentpay-order": {
+        "version": "1",
+        "rail": "x402_exact_escrow",
+        "orderId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "vault": "0x6666666666666666666666666666666666666666",
+        "buyer": "0x2222222222222222222222222222222222222222",
+        "seller": "0x3333333333333333333333333333333333333333",
+        "termsHash": "0x0d5a864aa63ea836483a7022a4fcafb0d50f4d55e63d71de2889ebfb5b875e09"
+      },
+      "payment-identifier": { "id": "payment-fixture-001" }
+    }
+  },
+  "evidence": {
+    "network": "eip155:8453",
+    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "transactionHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "receiptStatus": "success",
+    "transfer": {
+      "from": "0x2222222222222222222222222222222222222222",
+      "to": "0x6666666666666666666666666666666666666666",
+      "value": "1000"
+    },
+    "observedVaultBalance": "1000"
+  },
+  "fundingRecord": {
+    "schema": "agentpay.x402-escrow-funding.v1",
+    "paymentRail": "x402_exact_escrow",
+    "orderId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "termsHash": "0x0d5a864aa63ea836483a7022a4fcafb0d50f4d55e63d71de2889ebfb5b875e09",
+    "vaultAddress": "0x6666666666666666666666666666666666666666",
+    "x402PaymentIdentifier": "payment-fixture-001",
+    "evidence": {
+      "network": "eip155:8453",
+      "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "transactionHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "receiptStatus": "success",
+      "transfer": { "from": "0x2222222222222222222222222222222222222222", "to": "0x6666666666666666666666666666666666666666", "value": "1000" },
+      "observedVaultBalance": "1000"
+    },
+    "vaultState": "Funded",
+    "activatedTxHash": "0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "fundingVerifiedAt": "2026-08-16T10:00:00Z"
+  },
+  "receipt": {
+    "schema": "agentpay.x402-escrow-receipt.v1",
+    "paymentRail": "x402_exact_escrow",
+    "orderId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "vaultAddress": "0x6666666666666666666666666666666666666666",
+    "outputHash": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "usageUnits": "42",
+    "deliveryTxHash": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "createdAt": "2026-08-16T10:01:00Z"
+  },
+  "releaseRecord": {
+    "schema": "agentpay.x402-escrow-release.v1",
+    "paymentRail": "x402_exact_escrow",
+    "orderId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "vaultAddress": "0x6666666666666666666666666666666666666666",
+    "sellerAmount": "900",
+    "feeAmount": "100",
+    "buyerRefundAmount": "0",
+    "releaseTxHash": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "releasedAt": "2026-08-16T10:02:00Z"
+  },
+  "refundRecord": {
+    "schema": "agentpay.x402-escrow-refund.v1",
+    "paymentRail": "x402_exact_escrow",
+    "orderId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "vaultAddress": "0x6666666666666666666666666666666666666666",
+    "refundAmount": "1000",
+    "refundTxHash": "0x9999999999999999999999999999999999999999999999999999999999999999",
+    "reason": "timeout",
+    "refundedAt": "2026-08-16T10:03:00Z"
+  }
+}

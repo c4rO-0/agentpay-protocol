@@ -1,0 +1,67 @@
+name: protocol-ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      base_fork:
+        description: Run optional Base fork checks (requires BASE_RPC_URL secret)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: protocol-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  packages:
+    name: Public packages and boundary checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22.22.3
+      - run: corepack enable && corepack prepare pnpm@10.0.0 --activate
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test:packages
+
+  chain:
+    name: Local contracts and native payment lifecycle
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22.22.3
+      - run: corepack enable && corepack prepare pnpm@10.0.0 --activate
+      - uses: foundry-rs/foundry-toolchain@v1
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @agentpay/types build && pnpm --filter @agentpay/x402-escrow build
+      - name: Contract behavior and negative boundaries (no external RPC)
+        run: forge test --root contracts --no-match-path 'test/*Fork*.t.sol' -vv
+      - name: Published ABI matches the freshly compiled contract
+        run: node --test scripts/test/controller-artifact.test.mjs
+      - name: Real Anvil transactions and balance reconciliation
+        run: node scripts/test-native-lifecycle.mjs
+
+  base-fork:
+    name: Optional Base fork integration
+    if: github.event_name == 'workflow_dispatch' && inputs.base_fork
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: foundry-rs/foundry-toolchain@v1
+      - name: Require explicitly configured RPC
+        run: test -n "$BASE_RPC_URL" || { echo 'Configure BASE_RPC_URL before requesting fork checks.'; exit 1; }
+      - run: forge test --root contracts --match-path 'test/*Fork*.t.sol' -vv

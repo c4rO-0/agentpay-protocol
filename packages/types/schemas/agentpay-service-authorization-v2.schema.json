@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentpay.dev/schema/agentpay-service-authorization-v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "authorizationId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "providerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authorization": {
+      "type": "string",
+      "minLength": 1
+    },
+    "refundJobId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "orderId": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "skillId": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "profileHash": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "requestHash": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "expiresAtMs": {
+      "$ref": "#/$defs/UnixMilliseconds"
+    },
+    "responseDueAtMs": {
+      "$ref": "#/$defs/UnixMilliseconds"
+    },
+    "respondedAtMs": {
+      "$ref": "#/$defs/UnixMilliseconds"
+    },
+    "claimed": {
+      "type": "boolean"
+    },
+    "duplicate": {
+      "type": "boolean"
+    },
+    "deadlines": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "finalizationPolicy": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "finalization": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "version": {
+      "const": "agentpay.service-authorization.v2"
+    },
+    "maxUsageUnits": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)$"
+    },
+    "decision": {
+      "enum": [
+        "accept",
+        "reject"
+      ]
+    },
+    "state": {
+      "enum": [
+        "ready",
+        "claimed",
+        "accepted",
+        "rejected",
+        "receipt_accepted",
+        "response_overdue",
+        "rejection_refunded",
+        "timeout_refunded"
+      ]
+    }
+  },
+  "required": [
+    "version",
+    "authorizationId",
+    "orderId",
+    "providerId",
+    "skillId",
+    "profileHash",
+    "requestHash",
+    "maxUsageUnits",
+    "state",
+    "expiresAtMs"
+  ],
+  "$defs": {
+    "UnixMilliseconds": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 253402300799999
+    }
+  }
+}

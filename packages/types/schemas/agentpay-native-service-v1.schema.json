@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentpay.dev/schema/agentpay-native-service-v1.schema.json",
+  "title": "AgentPay native private request and participant Order projections",
+  "$defs": {
+    "PrivateRequestEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["request", "version"],
+      "properties": {
+        "request": {},
+        "version": { "const": "agentpay.private-request.v1" }
+      }
+    },
+    "ParticipantOrderCore": {
+      "type": "object",
+      "required": ["version", "role", "orderId", "orderStatus", "vaultAddress", "vaultState", "chainId", "assetAddress", "prepaidAmountAtomic", "basePriceAtomic", "unitPriceAtomic", "maxUsageUnits", "maxFeeAmountAtomic", "skillId", "profileHash", "providerId", "requestHash", "expiresAt", "refundAvailableAt", "createdAt", "updatedAt", "serviceState", "providerResponseDueAt", "usageUnits", "settlementTransactionHash"],
+      "properties": {
+        "version": { "const": "agentpay.participant-order.v1" },
+        "role": { "enum": ["buyer", "provider"] },
+        "orderId": { "$ref": "#/$defs/Bytes32" },
+        "orderStatus": { "enum": ["Created", "Funding", "Funded", "ServiceReady", "Accepted", "Rejected", "Delivered", "ReleasePending", "Released", "RefundPending", "Refunded", "Disputed", "Failed"] },
+        "vaultAddress": { "$ref": "#/$defs/Address" },
+        "vaultState": { "enum": ["Created", "Funded", "Delivered", "Released", "Refunded", "Cancelled"] },
+        "chainId": { "$ref": "#/$defs/Uint" },
+        "assetAddress": { "$ref": "#/$defs/Address" },
+        "prepaidAmountAtomic": { "$ref": "#/$defs/Uint" },
+        "basePriceAtomic": { "$ref": "#/$defs/Uint" },
+        "unitPriceAtomic": { "$ref": "#/$defs/Uint" },
+        "maxUsageUnits": { "$ref": "#/$defs/Uint" },
+        "maxFeeAmountAtomic": { "$ref": "#/$defs/Uint" },
+        "skillId": { "$ref": "#/$defs/Bytes32" },
+        "profileHash": { "$ref": "#/$defs/Bytes32" },
+        "providerId": { "type": "string", "minLength": 1 },
+        "requestHash": { "$ref": "#/$defs/Bytes32" },
+        "expiresAt": { "$ref": "#/$defs/Uint" },
+        "refundAvailableAt": { "$ref": "#/$defs/Uint" },
+        "createdAt": { "type": "string", "minLength": 1 },
+        "updatedAt": { "type": "string", "minLength": 1 },
+        "serviceState": { "enum": ["unavailable", "ready", "claimed", "accepted", "rejected", "delivered", "closed"] },
+        "providerResponseDueAt": { "type": ["string", "null"] },
+        "usageUnits": { "anyOf": [{ "$ref": "#/$defs/Uint" }, { "type": "null" }] },
+        "settlementTransactionHash": { "anyOf": [{ "$ref": "#/$defs/Bytes32" }, { "type": "null" }] }
+      }
+    },
+    "BuyerOrderProjection": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/ParticipantOrderCore" },
+        { "type": "object", "required": ["buyerAddress", "sellerAmountAtomic", "feeAmountAtomic", "buyerRefundAmountAtomic"], "properties": {
+          "role": { "const": "buyer" },
+          "buyerAddress": { "$ref": "#/$defs/Address" },
+          "sellerAmountAtomic": { "anyOf": [{ "$ref": "#/$defs/Uint" }, { "type": "null" }] },
+          "feeAmountAtomic": { "anyOf": [{ "$ref": "#/$defs/Uint" }, { "type": "null" }] },
+          "buyerRefundAmountAtomic": { "anyOf": [{ "$ref": "#/$defs/Uint" }, { "type": "null" }] }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "ProviderOrderProjection": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/ParticipantOrderCore" },
+        { "type": "object", "required": ["sellerAddress"], "properties": {
+          "role": { "const": "provider" },
+          "sellerAddress": { "$ref": "#/$defs/Address" }
+        } }
+      ],
+      "unevaluatedProperties": false
+    },
+    "Address": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" },
+    "Bytes32": { "type": "string", "pattern": "^0x[0-9a-f]{64}$" },
+    "Uint": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" }
+  }
+}

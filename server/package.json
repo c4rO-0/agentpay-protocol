@@ -1,0 +1,25 @@
+{
+  "name": "@agentpay/server",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/deal-demo-index.ts",
+    "deal-demo:settlement:dev": "tsx watch src/deal-demo-index.ts",
+    "deal-demo:mcp:dev": "tsx watch src/deal-random-mcp-demo.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/deal-demo-index.js",
+    "test": "tsx --test src/**/*.test.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "viem": "^2.21.57",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.39",
+    "tsx": "^4.20.4",
+    "typescript": "^5.9.2"
+  }
+}

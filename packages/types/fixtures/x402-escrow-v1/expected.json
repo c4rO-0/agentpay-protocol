@@ -1,0 +1,4 @@
+{
+  "canonicalTerms": "{\"protocol\":\"agentpay.x402.escrow.v1\",\"paymentRail\":\"x402_exact_escrow\",\"chainId\":\"8453\",\"factoryAddress\":\"0x1111111111111111111111111111111111111111\",\"orderId\":\"0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"buyer\":\"0x2222222222222222222222222222222222222222\",\"seller\":\"0x3333333333333333333333333333333333333333\",\"token\":\"0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913\",\"settlementAuthority\":\"0x4444444444444444444444444444444444444444\",\"feeRecipient\":\"0x5555555555555555555555555555555555555555\",\"amount\":\"1000\",\"maxFeeAmount\":\"100\",\"expiresAt\":\"1800000000\",\"refundAvailableAt\":\"1800003600\"}",
+  "termsHash": "0x0d5a864aa63ea836483a7022a4fcafb0d50f4d55e63d71de2889ebfb5b875e09"
+}

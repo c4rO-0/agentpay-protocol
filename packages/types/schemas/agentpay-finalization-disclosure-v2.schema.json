@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentpay.dev/schema/agentpay-finalization-disclosure-v2.schema.json",
+  "title": "Persisted finalization disclosure with explicit epoch milliseconds",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "state",
+    "deliveryAcceptedAtMs",
+    "confirmedAtMs",
+    "releaseScheduledAtMs",
+    "automaticReleaseBlocked",
+    "resolution",
+    "automaticReleaseRequiresConfirmation"
+  ],
+  "properties": {
+    "version": {
+      "const": "agentpay.finalization-disclosure.v2"
+    },
+    "state": {
+      "enum": [
+        "awaiting_confirmation",
+        "cooldown",
+        "disputed",
+        "resolved",
+        "queued",
+        "finalized"
+      ]
+    },
+    "deliveryAcceptedAtMs": {
+      "$ref": "#/$defs/UnixMilliseconds"
+    },
+    "confirmedAtMs": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/UnixMilliseconds"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "releaseScheduledAtMs": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/UnixMilliseconds"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "automaticReleaseBlocked": {
+      "type": "boolean"
+    },
+    "resolution": {
+      "enum": [
+        "release",
+        "refund",
+        null
+      ]
+    },
+    "automaticReleaseRequiresConfirmation": {
+      "const": false
+    }
+  },
+  "$defs": {
+    "UnixMilliseconds": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 253402300799999
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "anyOf": [
+          {
+            "properties": {
+              "automaticReleaseBlocked": {
+                "const": true
+              }
+            }
+          },
+          {
+            "properties": {
+              "state": {
+                "const": "finalized"
+              }
+            }
+          },
+          {
+            "properties": {
+              "resolution": {
+                "const": "refund"
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "properties": {
+          "releaseScheduledAtMs": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "releaseScheduledAtMs": {
+            "$ref": "#/$defs/UnixMilliseconds"
+          }
+        }
+      }
+    }
+  ]
+}

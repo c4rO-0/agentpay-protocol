@@ -1,0 +1,19 @@
+{
+  "paymentRequired": {
+    "version": "agentpay.service-payment-required.v1",
+    "resource": { "url": "https://provider.example/skills/random/invoke", "method": "POST" },
+    "requirement": {
+      "scheme": "agentpay",
+      "network": "eip155:8453",
+      "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "skillId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+      "profileHash": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "seller": "0x3333333333333333333333333333333333333333",
+      "baseAmount": "100000",
+      "unitPrice": "1000",
+      "maxUsageUnits": "100",
+      "offerId": "0x4444444444444444444444444444444444444444444444444444444444444444",
+      "validUntil": "1800000000"
+    }
+  }
+}

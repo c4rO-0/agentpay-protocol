@@ -1,0 +1,33 @@
+{
+  "legacy": {
+    "authorizationId": "asa_fixture",
+    "orderId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+    "providerId": "provider-fixture",
+    "skillId": "0x2222222222222222222222222222222222222222222222222222222222222222",
+    "profileHash": "0x3333333333333333333333333333333333333333333333333333333333333333",
+    "requestHash": "0x4444444444444444444444444444444444444444444444444444444444444444",
+    "maxUsageUnits": "1",
+    "state": "accepted",
+    "expiresAt": "2026-09-27T09:05:00.000Z",
+    "responseDueAt": "2026-09-27T09:02:00.000Z",
+    "respondedAt": "2026-09-27T09:01:00.000Z",
+    "decision": "accept",
+    "duplicate": false
+  },
+  "v2": {
+    "authorizationId": "asa_fixture",
+    "orderId": "0x1111111111111111111111111111111111111111111111111111111111111111",
+    "providerId": "provider-fixture",
+    "skillId": "0x2222222222222222222222222222222222222222222222222222222222222222",
+    "profileHash": "0x3333333333333333333333333333333333333333333333333333333333333333",
+    "requestHash": "0x4444444444444444444444444444444444444444444444444444444444444444",
+    "maxUsageUnits": "1",
+    "state": "accepted",
+    "decision": "accept",
+    "duplicate": false,
+    "version": "agentpay.service-authorization.v2",
+    "expiresAtMs": 1790499900000,
+    "responseDueAtMs": 1790499720000,
+    "respondedAtMs": 1790499660000
+  }
+}

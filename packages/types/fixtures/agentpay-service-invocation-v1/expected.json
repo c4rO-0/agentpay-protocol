@@ -1,0 +1,15 @@
+{
+  "output": {
+    "nested": {
+      "z": 1,
+      "a": [
+        true,
+        null,
+        "hello"
+      ]
+    },
+    "answer": "yes"
+  },
+  "outputHash": "0x88893430a629cda06711fd255f7a54670781be99e9743c204a58364e91c99e29",
+  "serializedOutput": "{\"nested\":{\"z\":1,\"a\":[true,null,\"hello\"]},\"answer\":\"yes\"}"
+}

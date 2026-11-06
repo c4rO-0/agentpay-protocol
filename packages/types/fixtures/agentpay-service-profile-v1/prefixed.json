@@ -1,0 +1,14 @@
+{
+  "profile": {
+    "version": "agentpay.service-profile.v1",
+    "providerId": "provider:market:sample",
+    "serviceId": "service.agentpay.random",
+    "mcpEndpoint": "http://127.0.0.1:6571/provider/services/service.agentpay.random/mcp/invoke",
+    "paymentEndpoint": "http://127.0.0.1:6571/provider/services/service.agentpay.random/agentpay/invoke",
+    "seller": "0x1000000000000000000000000000000000000001",
+    "network": "eip155:31337",
+    "asset": "0x2000000000000000000000000000000000000002"
+  },
+  "canonicalProfile": "{\"asset\":\"0x2000000000000000000000000000000000000002\",\"mcpEndpoint\":\"http://127.0.0.1:6571/provider/services/service.agentpay.random/mcp/invoke\",\"network\":\"eip155:31337\",\"paymentEndpoint\":\"http://127.0.0.1:6571/provider/services/service.agentpay.random/agentpay/invoke\",\"providerId\":\"provider:market:sample\",\"seller\":\"0x1000000000000000000000000000000000000001\",\"serviceId\":\"service.agentpay.random\",\"version\":\"agentpay.service-profile.v1\"}",
+  "profileHash": "0xc72f5884f037b11e30c7e0ea10d0dd4140ad25bd1d92b379b5bdff55ddb52656"
+}

@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentpay.dev/schema/agentpay-order-deadlines-v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "deliveryDueAtMs",
+    "chainDeliveryDueAtMs",
+    "refundAvailableAtMs",
+    "providerResponseDueAtMs",
+    "chainMarginMs",
+    "deadlinePolicyVersion"
+  ],
+  "properties": {
+    "version": {
+      "const": "agentpay.order-deadlines.v2"
+    },
+    "deliveryDueAtMs": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/UnixMilliseconds"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "chainDeliveryDueAtMs": {
+      "$ref": "#/$defs/UnixMilliseconds"
+    },
+    "refundAvailableAtMs": {
+      "$ref": "#/$defs/UnixMilliseconds"
+    },
+    "providerResponseDueAtMs": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/UnixMilliseconds"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "chainMarginMs": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 253402300799999
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "deadlinePolicyVersion": {
+      "enum": [
+        "agentpay.order-deadlines.v1",
+        null
+      ]
+    }
+  },
+  "$defs": {
+    "UnixMilliseconds": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 253402300799999
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "deadlinePolicyVersion": {
+            "type": "null"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "deliveryDueAtMs": {
+            "type": "null"
+          },
+          "chainMarginMs": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "deliveryDueAtMs": {
+            "$ref": "#/$defs/UnixMilliseconds"
+          },
+          "chainMarginMs": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 253402300799999
+          }
+        }
+      }
+    }
+  ]
+}

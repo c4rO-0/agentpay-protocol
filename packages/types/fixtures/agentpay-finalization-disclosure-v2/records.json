@@ -1,0 +1,21 @@
+{
+  "legacy": {
+    "state": "awaiting_confirmation",
+    "deliveryAcceptedAt": "2026-09-27T09:00:50.209Z",
+    "confirmedAt": null,
+    "releaseScheduledAt": "2026-09-27T09:10:50.209Z",
+    "automaticReleaseBlocked": false,
+    "resolution": null,
+    "automaticReleaseRequiresConfirmation": false
+  },
+  "v2": {
+    "state": "awaiting_confirmation",
+    "automaticReleaseBlocked": false,
+    "resolution": null,
+    "automaticReleaseRequiresConfirmation": false,
+    "version": "agentpay.finalization-disclosure.v2",
+    "deliveryAcceptedAtMs": 1790499650209,
+    "confirmedAtMs": null,
+    "releaseScheduledAtMs": 1790500250209
+  }
+}

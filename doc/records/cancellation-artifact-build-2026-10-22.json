@@ -1,0 +1,34 @@
+{
+  "bundleId": "24975c180fac14383df1",
+  "sourceDigest": "6dc87ddb53780457a60e4acb2221dee64d01ab276691c867b0542ed88d276a12",
+  "compilerSha256": "fb03a29a517452b9f12bcf459ef37d0a543765bb3bbc911e70a87d6a37c30d5f",
+  "artifactSha256": {
+    "OrderEscrowVault": "b44f4db88805528192ebea11123b52b8c7c7ea5d8db0df1294f1860ed099bf35",
+    "AgentPayEscrowFactory": "666cfe91e140bb42a95131aafcc64fcf3a9086e70ac84daeb7b694fa6f624cd5",
+    "SettlementAuthorityController": "4761f0b290e9a2a80549c862251735d5d80a50ce76ce1a8e29441e5c883012be"
+  },
+  "bytecode": {
+    "OrderEscrowVault": {
+      "creationKeccak256": "0x634de957a234694c3f32cefc8203c8b746e34faa41863ef2e9e2f04f5a5ea27e",
+      "runtimeTemplateKeccak256": "0xb5fe543758fcf400c872960832605bb7f90257803059375a27c6dc7f994f9ef6",
+      "runtimeHasImmutables": false
+    },
+    "AgentPayEscrowFactory": {
+      "creationKeccak256": "0x77a4c62e74b5433cc2a04565044e35a4de83d991164c55ff0ec8b321d490bc1c",
+      "runtimeTemplateKeccak256": "0xc72a263f1a647e9907fa36426f832fda58d1d4366e423fd0e38b9e1ba2a36b3c",
+      "runtimeHasImmutables": true
+    },
+    "SettlementAuthorityController": {
+      "creationKeccak256": "0xe524ef98bb545208c33a9a3593a218844d18fb7e248dc63064b8423ff00380cd",
+      "runtimeTemplateKeccak256": "0xcc26a69e8d3043a6b93fac6597e04be15fe10e50a8a1d93d055e1f8f7baf9d1f",
+      "runtimeHasImmutables": true
+    }
+  },
+  "compilerExecution": {
+    "backend": "offline-docker",
+    "image": "ghcr.io/foundry-rs/foundry:latest",
+    "imageId": "sha256:186542c36fbcb76ba9e7cbf6711dfed201218f40e762b77a6a2240f8aa6afadb",
+    "memoryBytes": 1073741824,
+    "network": "none"
+  }
+}
