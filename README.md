@@ -15,6 +15,9 @@ separate projects.
 Use Node **22.22.3** and pnpm **10** to match CI. Solidity checks additionally need
 Foundry; the compiler/settings are pinned in `contracts/foundry.toml`.
 
+Corepack is required by the commands below. If it is absent, install it with
+`npm install --global corepack` using your Node installation.
+
 ```bash
 git clone https://github.com/c4rO-0/agentpay-protocol.git
 cd agentpay-protocol

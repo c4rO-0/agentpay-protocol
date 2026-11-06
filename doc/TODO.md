@@ -7,7 +7,7 @@
 - [x] Verify unchanged syntax structure, package builds, public checks and tarball consumer.
 - [x] Remove private-host instructions from public AGENTS.md and correct the package catalog.
 - [x] Ignore environment-file variants and logs while retaining `.env.example`.
-- [ ] Owner review before changing source visibility; keep package distribution and audit gates separate.
+- [x] Owner reviewed and enabled public source visibility; package distribution and audit remain separate gates.
 
 ## Functional test consolidation — 2026-11-06
 
@@ -24,7 +24,8 @@
 
 - [x] Review current tracked files, retain MIT, clarify independent source build and security contact.
 - [x] Replace main with the approved reviewed initial snapshot; remote verification is recorded by the release operator.
-- [ ] Verify anonymous public checkout after repository visibility is changed.
+- [x] Verify anonymous remote refs after public visibility: main `1c6ffab`; no published tags at review.
+- [ ] Verify a complete anonymous fresh clone and source ZIP installation.
 - [ ] Publish supported consumer artifacts through the separately agreed distribution design.
 
 

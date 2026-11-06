@@ -1,5 +1,14 @@
 # AgentPay Protocol Progress
 
+## Public documentation follow-up — 2026-11-06
+
+The owner enabled public source visibility. Anonymous remote refs were verified:
+only main `1c6ffab` was advertised, without tags. This verifies ref access, not
+fresh-clone/ZIP installation or disappearance of every historical GitHub object.
+README prerequisites now explain how to obtain Corepack. Current TODO separates
+completed visibility/ref checks from remaining installation, release and audit gates.
+No source behavior or live deployment changed in this follow-up.
+
 ## Pre-publication follow-up — 2026-11-06
 
 Removed private parent-workspace/debug instructions from Protocol's AGENTS.md;

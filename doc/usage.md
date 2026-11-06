@@ -12,6 +12,9 @@ need Foundry (`forge` and `anvil`) and the compiler pinned in
 The package engine ranges are compatibility declarations, not evidence that every
 older Node release has passed this verification.
 
+If Corepack is missing, install it with `npm install --global corepack` using your
+Node installation before running these commands.
+
 ```bash
 corepack enable
 pnpm install --frozen-lockfile
