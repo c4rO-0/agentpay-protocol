@@ -4,6 +4,11 @@ The first npm release is `@c4roa0/agentpay-protocol@0.14.1`.
 It replaces the temporary `@agentpay/types` package name without changing public
 wire formats, hashes or ABI behavior. Entries below retain their historical names.
 
+## 0.14.3 — Trusted publishing setup, 2026-11-06
+
+- Prepare the first GitHub Actions OIDC release; no runtime or protocol changes.
+- Publication status and provenance are established by the successful release workflow.
+
 ## 0.14.2 — Documentation refresh, 2026-11-06
 
 - Rewrite the package README with installation, a runnable example and integration links.

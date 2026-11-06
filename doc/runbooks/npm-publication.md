@@ -1,16 +1,69 @@
 # Publish the public Protocol core
 
-The npm account scope is `c4roa0`. The first verified release is
-`@c4roa0/agentpay-protocol@0.14.1`. This replaces the temporary package name
-`@agentpay/types`; it does not change wire versions, hashes or contracts.
-The source directory remains `packages/types`. No other workspace package is
-approved for npm publication. Existing external consumers are not switched yet.
+Use the **Publish Protocol to npm** GitHub Action to publish
+`@c4roa0/agentpay-protocol`. It uses npm Trusted Publishing, so no npm Token or
+GitHub secret is required. Only the core in `packages/types` is published.
 
-The next approved documentation-only candidate is `0.14.2`.
+## One-time setup
 
-## Prepare and inspect
+On the GitHub repository, open **Settings → Environments** and create
+`npm-publish`. Under deployment branches/tags, allow only the `main` branch.
+Environment names must match exactly. Add required reviewers if your team needs
+an approval gate; creating an environment alone does not add approval protection.
 
-From the Protocol repository, with its pinned pnpm available:
+On the npm package's **Settings → Trusted Publisher**, configure:
+
+| Field | Value |
+| --- | --- |
+| Publisher | GitHub Actions |
+| Organization or user | `c4rO-0` |
+| Repository | `agentpay-protocol` |
+| Workflow filename | `publish.yml` |
+| Environment name | `npm-publish` |
+| Allowed actions | Allow `npm publish`; separate dist-tag management is not needed |
+
+The workflow must be pushed before it can run. New npm connections must complete
+an initial successful publication within the deadline shown in npm Settings.
+See [npm Trusted Publishing](https://docs.npmjs.com/trusted-publishers/).
+
+## Release a version
+
+1. Update `packages/types/package.json` and its changelog with a new stable version.
+   Review the code, package contents and compatibility impact. Push reviewed changes
+   to `main`; this runs CI but does **not** publish anything.
+2. In GitHub, open **Actions → Publish Protocol to npm → Run workflow**.
+3. Choose `main` and enter the exact package version, such as `0.14.3`.
+4. Run the workflow and, if configured, approve its environment deployment.
+
+The workflow installs from the lockfile, runs package checks and the local Anvil
+payment lifecycle, packs the core, then publishes that archive. Any check failure
+blocks upload. Node and npm support OIDC; publishing runs on a GitHub-hosted runner.
+No production chain or deployed platform services are contacted by these tests.
+
+Success ends with **Verify public registry integrity**. npm also generates package
+provenance for this public repository. Confirm the version on npm and that the
+Trusted Publisher changes from pending to validated after the first release.
+Then select **Require two-factor authentication and disallow bypass 2fa tokens**
+in npm Publishing access and revoke the old publishing Token if no longer needed.
+
+## If a run fails
+
+- Before upload: fix the error and rerun the workflow for the reviewed commit.
+- After upload: check the logs and public version before rerunning. npm can accept
+  a publication before the version becomes queryable; verification retries for this
+  reason. Do not publish again or bump versions merely to bypass a query delay.
+- Existing version: npm versions are immutable. A repeat upload must fail; inspect
+  the existing version rather than overwrite it.
+- Authentication: verify all npm fields match the table, direct publishing is allowed,
+  and the connection has not expired. Do not add a token as a silent fallback.
+
+To repeat only the public integrity check with the original built archive:
+
+```sh
+node scripts/verify-npm-release.mjs artifacts/npm/c4roa0-agentpay-protocol-0.14.3.tgz 0.14.3
+```
+
+## Inspect an archive locally
 
 ```sh
 pnpm install --frozen-lockfile
@@ -18,40 +71,8 @@ pnpm test:packages
 bash scripts/prepare-npm-release.sh
 ```
 
-The preparation script builds the core and packs it locally. Review the printed
-file inventory and SHA-256. The archive includes compiled ESM/declarations, public
-schemas, unsigned conformance fixtures, README, changelog and MIT license.
-It excludes Solidity build output, source tests, historical records and services.
-Independent consumer tests install actual tarballs outside the workspace and check
-hashing for two business payloads, ABI/schema access and fixture availability.
-
-## Upload — separate owner action
-
-Only after candidate approval, authenticate locally as `c4roa0`. Never put a token
-in Git, chat, shell command arguments or logs. Use npm's local credential mechanism.
-Verify the account with `npm whoami --registry=https://registry.npmjs.org/`.
-Publish the exact reviewed archive, not the workspace root:
-
-```sh
-npm publish artifacts/npm/c4roa0-agentpay-protocol-0.14.2.tgz --access public --registry=https://registry.npmjs.org/
-```
-
-npm versions are immutable. If that version already exists, inspect its integrity
-and stop rather than overwrite or silently increment. After publication, verify
-registry metadata and an independent registry install before upgrading consumers.
-An npm download/install does not prove chain or payment compatibility.
-
-## Follow-up
-
-Switch consumer dependencies and imports one repository at a time, with their
-behavior checks. Do not auto-upgrade running programs, saved Policies or Orders.
-Configure GitHub trusted publishing for subsequent releases rather than keeping
-a long-lived publishing token. Package semantic versions and deployment contract
-addresses are different compatibility boundaries.
-
-## Registry processing delay
-
-An accepted publication can temporarily return 404 while npm processes it. Preserve
-the successful publish output and retry metadata queries with bounded backoff. Do
-not republish or increment the version to work around that delay. Verify registry
-integrity and an independent registry install once the version becomes available.
+The script prints the file inventory and SHA-256 without publishing. The archive
+contains compiled ESM/declarations, public schemas, conformance fixtures, README,
+changelog and MIT license. Deployment artifacts, services and historical records
+are excluded. A package release does not upgrade consumers or saved Policies/Orders.
+Verify each consumer upgrade separately.

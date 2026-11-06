@@ -1,5 +1,18 @@
 # AgentPay Protocol Progress
 
+## Trusted publishing prepared — 2026-11-06
+
+Owner configured npm Trusted Publisher; pending validation until the displayed
+2026-11-08 13:57 UTC deadline. Added manual `publish.yml`, main/repository guards,
+`npm-publish` environment, exact version confirmation, package + local chain gates,
+OIDC upload and bounded public integrity verification. Ordinary pushes cannot
+publish. Prepared 0.14.3 (changelog/version only versus 0.14.2) for first validation.
+Local verification: workflow YAML and shell steps parsed; 0.14.3 archive differs
+only in version/changelog; the new registry verifier passed against public 0.14.2.
+GitHub environment configuration and actual OIDC execution remain operator checks;
+local checks cannot validate the npm/GitHub trust relationship. No Token fallback.
+
+
 ## Clean CI dependency build correction — 2026-11-06
 
 The chain job still selected the retired `@agentpay/types` name. pnpm skipped that

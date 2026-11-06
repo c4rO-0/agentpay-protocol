@@ -48,7 +48,8 @@
 - [x] Verify the prepared tarball and independent consumer before first npm upload.
 - [x] Owner-approved first upload and independent registry install verification.
 - [ ] Upgrade external consumers separately after their compatibility checks.
-- [ ] Configure trusted publishing for subsequent releases.
+- [x] Implement manual GitHub OIDC publication workflow and operator guide.
+- [ ] Verify GitHub environment and first OIDC publication before npm connection expiry.
 
 - [x] Align Provider HTTP/HTTPS support with types 0.14.1; keep platform credential and local-control protection, original profile hashes and historical identity. Controlled source verification recorded in progress.
 - [ ] Coordinate deployment of matching transport validators/artifacts; verify actual Provider onboarding without changing old identities.
