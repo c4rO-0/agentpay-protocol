@@ -9,7 +9,7 @@
     "start": "node src/runner.mjs"
   },
   "dependencies": {
-    "@agentpay/types": "workspace:*",
+    "@c4roa0/agentpay-protocol": "workspace:*",
     "@agentpay/x402-escrow": "workspace:*",
     "viem": "^2.46.3"
   }

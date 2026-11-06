@@ -59,7 +59,7 @@ buyer.
 
 - `AgentPayEscrowFactory` and `OrderEscrowVault` execute on Anvil;
 - mock USDC is a real six-decimal ERC-20 contract;
-- canonical terms and `termsHash` use `@agentpay/types`;
+- canonical terms and `termsHash` use `@c4roa0/agentpay-protocol`;
 - Payment Required and evidence checks use `@agentpay/x402-escrow`;
 - funding, activation, delivery, release, and refund are real EVM transactions;
 - the example ticket is signed by the local Settlement development account.

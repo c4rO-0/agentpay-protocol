@@ -1,4 +1,4 @@
-import type { X402PaymentRequired } from "@agentpay/types";
+import type { X402PaymentRequired } from "@c4roa0/agentpay-protocol";
 import type {
   NormalizedSettlementResult,
   NormalizedVerifyResult,

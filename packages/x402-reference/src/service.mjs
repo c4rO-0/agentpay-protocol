@@ -9,7 +9,7 @@ import { privateKeyToAccount } from "viem/accounts";
 import { foundry } from "viem/chains";
 import {
   agentPayEscrowFactoryAbi, hashEscrowOrderTerms, orderEscrowVaultAbi,
-} from "@agentpay/types";
+} from "@c4roa0/agentpay-protocol";
 import {
   FundingIdempotencyRegistry, buildPaymentRequired, validatePaymentRequired,
   validateSettlementEvidence, validateVaultTerms, waitForVaultBalance,

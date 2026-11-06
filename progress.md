@@ -1,5 +1,52 @@
 # AgentPay Protocol Progress
 
+## Documentation patch release prepared — 2026-11-06
+
+Prepared `@c4roa0/agentpay-protocol@0.14.2` after reader-focused review of both
+homepages. Archive comparison against published 0.14.1 confirms only README,
+CHANGELOG and package version differ; all runtime/schema/ABI/fixture bytes match.
+Independent packed-consumer installation and two-payload public checks passed.
+Archive SHA-256: `c537593175253b66c32ce4f78048c712f1a3ddc10c848e578c8b0ff52bd41af5`.
+The owner approved publication; upload awaits terminal credential entry. Do not
+mark 0.14.2 published until registry verification passes. Consumers remain unchanged.
+
+
+## README refresh — 2026-11-06
+
+Rewrote the npm package and repository homepages around intended readers, npm
+installation and runnable request-hash examples. Source contributor setup is kept
+separate from library consumption. Detailed API notes moved to
+`doc/reference/public-package-api.md` and remain indexed. Both examples executed
+successfully; local documentation targets checked. Documentation only: no version
+bump or new publication. npm 0.14.1 still contains its original README; these edits
+need a later approved package release to appear on npm.
+
+
+## First public npm release verified — 2026-11-06
+
+`@c4roa0/agentpay-protocol@0.14.1` is published and independently installed from
+npm. Registry integrity matches the reviewed tarball; public imports, two-business
+request hashing, ABI, schema and installed fixture checks passed. The initial
+post-upload query returned 404 while npm processed the accepted publication;
+verification was retried without re-publishing. External consumers still use their
+existing dependencies. Next: commit the release preparation/evidence, then upgrade
+consumer repositories in separate verified loops; trusted publishing remains open.
+This is package distribution evidence, not chain/deployment or real-funds approval.
+
+
+## npm core preparation — 2026-11-06
+
+Approved package: `@c4roa0/agentpay-protocol@0.14.1` (source remains
+`packages/types`). Core metadata, MIT license, workspace consumers, lockfile and
+packing tools now use the public name. Wire formats/hashes/contracts are unchanged.
+Package builds, public tests and independent tarball install/consumer checks passed,
+including two business payloads and installed schema/ABI/fixture access. Initial
+sandbox run blocked the test runner IPC socket; permitted rerun passed. Reviewed
+archive contains 77 allowlisted files. This verifies local artifacts, not npm upload
+or real-network acceptance. No external consumer dependencies were changed.
+Publication and registry installation subsequently passed; see the release entry above.
+
+
 ## Public documentation follow-up — 2026-11-06
 
 The owner enabled public source visibility. Anonymous remote refs were verified:

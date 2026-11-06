@@ -40,7 +40,7 @@
     "x402:deployment:verify": "node scripts/verify-x402-deployment.mjs",
     "x402:mechanism-dispatch:probe": "node scripts/x402-mechanism-dispatch-probe.mjs",
     "artifacts:pack:settlement": "bash scripts/pack-settlement-artifacts.sh",
-    "test:packages": "pnpm build && pnpm --filter @agentpay/types exec node --test test/*.test.mjs && pnpm --filter @agentpay/x402-escrow exec node --test test/*.test.mjs && pnpm --filter @agentpay/server test && node scripts/test-package-consumer.mjs",
+    "test:packages": "pnpm build && pnpm --filter @c4roa0/agentpay-protocol exec node --test test/*.test.mjs && pnpm --filter @agentpay/x402-escrow exec node --test test/*.test.mjs && pnpm --filter @agentpay/server test && node scripts/test-package-consumer.mjs",
     "test:chain": "forge test --root contracts --no-match-path \"test/*Fork*.t.sol\" -vv && node --test scripts/test/controller-artifact.test.mjs && node scripts/test-native-lifecycle.mjs"
   },
   "dependencies": {

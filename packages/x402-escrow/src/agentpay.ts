@@ -11,7 +11,7 @@ import {
   type AgentPayVerifyResponse,
   type Bytes32,
   type EvmAddress,
-} from "@agentpay/types";
+} from "@c4roa0/agentpay-protocol";
 import {
   getAddress,
   hashTypedData,

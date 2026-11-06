@@ -163,7 +163,7 @@ publishing the corresponding output or request.
 ## Consistency Rules
 
 - Addresses, atomic amounts, hashes, and timestamps use the public protocol
-  formats from `@agentpay/types`.
+  formats from `@c4roa0/agentpay-protocol`.
 - A transaction hash is published only after it is associated with the expected
   chain, Vault, order, and operation.
 - A facilitator `success` response is not a funding status.

@@ -13,7 +13,11 @@ These describe current evidence and sequencing; dated records are historical evi
 | AI assistants | [AGENTS](../AGENTS.md), then progress and TODO |
 | Maintainers and reviewers | [Evidence index](records/README.md), current plans below |
 
+- [Publish the public core package](runbooks/npm-publication.md)
+
 ## Reference
+
+- [Public package API notes](reference/public-package-api.md)
 
 - [Functional verification and test consolidation](reference/testing.md)
 

@@ -5,14 +5,14 @@ import {
   hashPrivateRequest,
   hashAgentPayRegistryQualification,
   agentPaySpendingModuleAbi,
-} from "@agentpay/types";
+} from "@c4roa0/agentpay-protocol";
 import {
   buildAgentPayCommitmentTypedData,
   hashAgentPayCommitment,
 } from "@agentpay/x402-escrow";
 const schema = JSON.parse(
   await readFile(
-    new URL(import.meta.resolve("@agentpay/types/service-invocation-schema")),
+    new URL(import.meta.resolve("@c4roa0/agentpay-protocol/service-invocation-schema")),
     "utf8",
   ),
 );
@@ -72,3 +72,9 @@ assert.match(
 console.log(
   "PASS: independent packed consumer imports types, schema, ABI and escrow exports for two business payloads.",
 );
+
+// Installed fixtures remain available to non-TypeScript conformance consumers.
+const fixture = JSON.parse(await readFile(new URL(
+  "../fixtures/agentpay-native-service-v1/records.json",
+  import.meta.resolve("@c4roa0/agentpay-protocol")), "utf8"));
+assert.ok(fixture && typeof fixture === "object");

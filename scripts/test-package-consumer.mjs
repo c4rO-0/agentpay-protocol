@@ -29,7 +29,7 @@ try {
     );
     packages.push({
       name: pkg.name,
-      file: join(dir, `agentpay-${name}-${pkg.version}.tgz`),
+      file: join(dir, `${pkg.name.replace(/^@/, "").replace("/", "-")}-${pkg.version}.tgz`),
     });
   }
   await writeFile(
@@ -40,7 +40,7 @@ try {
       dependencies: Object.fromEntries(
         packages.map((p) => [p.name, "file:" + p.file]),
       ),
-      pnpm: { overrides: { "@agentpay/types": "file:" + packages[0].file } },
+      pnpm: { overrides: { "@c4roa0/agentpay-protocol": "file:" + packages[0].file } },
     }),
   );
   run(

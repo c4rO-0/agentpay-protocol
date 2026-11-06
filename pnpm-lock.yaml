@@ -70,7 +70,7 @@ importers:
 
   packages/x402-escrow:
     dependencies:
-      '@agentpay/types':
+      '@c4roa0/agentpay-protocol':
         specifier: workspace:*
         version: link:../types
       '@coinbase/cdp-sdk':
@@ -83,12 +83,12 @@ importers:
 
   packages/x402-reference:
     dependencies:
-      '@agentpay/types':
-        specifier: workspace:*
-        version: link:../types
       '@agentpay/x402-escrow':
         specifier: workspace:*
         version: link:../x402-escrow
+      '@c4roa0/agentpay-protocol':
+        specifier: workspace:*
+        version: link:../types
       viem:
         specifier: ^2.46.3
         version: 2.55.11(typescript@5.9.3)(zod@3.25.76)

@@ -111,7 +111,7 @@ or User Policy.
 | Authority Controller | constrained operator actions on its Factory Vaults | arbitrary calls or application dispute adjudication |
 | Factory contract | deterministic Vault prediction and creation | pricing, payment verification, upgrades |
 | Vault contract | custody, immutable terms, state, release/refund constraints | output quality, disputes, facilitator calls |
-| `@agentpay/types` | public fields, Schema, canonical terms, private-request hash, participant projections, ABIs, fixtures | RPC calls, credentials, policy |
+| `@c4roa0/agentpay-protocol` | public fields, Schema, canonical terms, private-request hash, participant projections, ABIs, fixtures | RPC calls, credentials, policy |
 | `@agentpay/x402-escrow` core | Payment Required, normalized evidence checks, Vault checks, replay semantics | databases, HTTP routes, private keys |
 | AgentPay binding reference | canonical verify/accept rules and conformance fixtures | production endpoints, persistence, queues, relayer credentials |
 | Settlement x402 Gateway | standard facilitator routing and native AgentPay order orchestration | public Protocol rules or user key custody |
@@ -125,7 +125,7 @@ or User Policy.
 Dependencies point inward toward stable public contracts:
 
 ```text
-@agentpay/x402-escrow -> @agentpay/types
+@agentpay/x402-escrow -> @c4roa0/agentpay-protocol
 local references    -> public libraries + contract artifacts
 external consumers  -> public libraries + contract artifacts
 ```

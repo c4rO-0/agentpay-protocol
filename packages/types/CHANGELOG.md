@@ -1,3 +1,14 @@
+# Publication naming
+
+The first npm release is `@c4roa0/agentpay-protocol@0.14.1`.
+It replaces the temporary `@agentpay/types` package name without changing public
+wire formats, hashes or ABI behavior. Entries below retain their historical names.
+
+## 0.14.2 — Documentation refresh, 2026-11-06
+
+- Rewrite the package README with installation, a runnable example and integration links.
+- No runtime code, dependencies, schemas, fixtures or ABI changes from 0.14.1.
+
 ## 0.14.1 — Provider transport validation, 2026-11-02
 
 - Accept canonical HTTP and HTTPS public Provider profiles. Preserve all existing

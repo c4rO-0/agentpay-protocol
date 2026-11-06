@@ -6,7 +6,7 @@ import type {
   EvmAddress,
   TransactionHash,
   X402PaymentRequired,
-} from "@agentpay/types";
+} from "@c4roa0/agentpay-protocol";
 import type {
   NormalizedSettlementResult,
   NormalizedVerifyResult,

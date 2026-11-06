@@ -1,5 +1,7 @@
 # Evidence catalog
 
+- [First public npm core release](npm-core-release-2026-11-06.md).
+
 - [Functional CI consolidation](functional-ci-2026-11-06.md): independent packages, real Anvil transactions and removed synthetic coverage.
 
 - [Business-neutrality source correction](business-neutrality-source-2026-10-21.md).

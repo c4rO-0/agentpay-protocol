@@ -1,5 +1,12 @@
 # AgentPay Protocol TODO
 
+## Package documentation follow-up
+
+- [x] Rewrite npm/GitHub homepages, retain API notes, verify links and runnable examples.
+- [x] Prepare and verify documentation-only 0.14.2; owner approved publication.
+- [ ] Publish 0.14.2 and verify registry integrity; terminal credential entry remains.
+
+
 ## Community readiness polish — 2026-11-06
 
 - [x] Align current entry guides, module ownership and historical-tool labels.
@@ -26,12 +33,16 @@
 - [x] Replace main with the approved reviewed initial snapshot; remote verification is recorded by the release operator.
 - [x] Verify anonymous remote refs after public visibility: main `1c6ffab`; no published tags at review.
 - [ ] Verify a complete anonymous fresh clone and source ZIP installation.
-- [ ] Publish supported consumer artifacts through the separately agreed distribution design.
+- [x] Publish and verify the approved public core npm artifact; other workspace packages remain private.
 
 
 ## Protocol public distribution — before release
 
-- [ ] Replace the interim `@agentpay/types`/vendored-archive integration with an agreed public distribution plan: package boundaries/name/channel, reproducible versioned artifacts, integrity, compatibility and consumer upgrades. Do not assume npm or the current package name is the final choice. External integration must not require this parent workspace.
+- [x] Select `@c4roa0/agentpay-protocol` on npm; prepare core metadata and internal imports.
+- [x] Verify the prepared tarball and independent consumer before first npm upload.
+- [x] Owner-approved first upload and independent registry install verification.
+- [ ] Upgrade external consumers separately after their compatibility checks.
+- [ ] Configure trusted publishing for subsequent releases.
 
 - [x] Align Provider HTTP/HTTPS support with types 0.14.1; keep platform credential and local-control protection, original profile hashes and historical identity. Controlled source verification recorded in progress.
 - [ ] Coordinate deployment of matching transport validators/artifacts; verify actual Provider onboarding without changing old identities.

@@ -1,7 +1,6 @@
 {
-  "name": "@agentpay/types",
-  "version": "0.14.1",
-  "private": true,
+  "name": "@c4roa0/agentpay-protocol",
+  "version": "0.14.2",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
@@ -34,7 +33,9 @@
     "dist",
     "schemas",
     "fixtures",
-    "CHANGELOG.md"
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -46,5 +47,19 @@
   "devDependencies": {
     "ajv": "^8.20.0",
     "typescript": "^5.9.2"
+  },
+  "description": "AgentPay public protocol types, canonical hashes, ABIs, schemas and conformance fixtures",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c4rO-0/agentpay-protocol.git",
+    "directory": "packages/types"
+  },
+  "homepage": "https://github.com/c4rO-0/agentpay-protocol#readme",
+  "bugs": {
+    "url": "https://github.com/c4rO-0/agentpay-protocol/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

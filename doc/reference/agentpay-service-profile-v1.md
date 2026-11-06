@@ -34,7 +34,7 @@ fields fail closed. [Schema](../../packages/types/schemas/agentpay-service-profi
 [fixture](../../packages/types/fixtures/agentpay-service-profile-v1/records.json)
 and [expected bytes/hash](../../packages/types/fixtures/agentpay-service-profile-v1/expected.json)
 are the conformance examples. The TypeScript export is `canonicalizeServiceProfile`,
-`hashServiceProfile` and `paymentEndpointForService` from `@agentpay/types`.
+`hashServiceProfile` and `paymentEndpointForService` from `@c4roa0/agentpay-protocol`.
 
 Changing Provider, endpoint, Seller, network or asset changes the hash and
 requires registration/Registry qualification for the new version. Replacing a

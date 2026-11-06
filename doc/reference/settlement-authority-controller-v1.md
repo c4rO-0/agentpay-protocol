@@ -31,7 +31,7 @@ explicit Vault method.
   ownership transfer, proxy, or upgrade function.
 
 The normative callable and event surface is
-`settlementAuthorityControllerAbi` from `@agentpay/types`. The source contract
+`settlementAuthorityControllerAbi` from `@c4roa0/agentpay-protocol`. The source contract
 remains normative for behavior. The ABI version is `1.0.0`; adding authority or
 changing role semantics is a breaking change even if Solidity selectors remain
 compatible.

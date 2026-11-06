@@ -6,7 +6,7 @@ import type {
   EvmAddress,
   Bytes32,
   TransactionHash,
-} from "@agentpay/types";
+} from "@c4roa0/agentpay-protocol";
 
 export * from "./agentpay.js";
 

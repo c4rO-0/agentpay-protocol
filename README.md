@@ -1,22 +1,63 @@
 # AgentPay Protocol
 
-AgentPay lets an AI agent purchase services within a budget approved by its user.
-This repository defines the contracts, message formats and verification rules that
-make those payments independently checkable. A Safe holds the funds; its owner
-creates a bounded Policy, and a delegated key authorizes eligible payments without
-another owner signature for every order.
+AgentPay lets AI agents purchase services within a budget approved by their user.
+A Safe smart-contract wallet holds the funds and enforces spending limits; eligible purchases do not
+require another owner signature for every order.
 
-This is the protocol repository for developers and integrators. Wallet key storage,
-service execution, marketplace accounts and production Settlement workers live in
-separate projects.
+This repository defines the public contracts, message formats and verification
+rules behind those payments. It includes a JavaScript/TypeScript package for
+integrators and Solidity contracts for protocol developers.
 
-## Start here
+## Use the npm package
 
-Use Node **22.22.3** and pnpm **10** to match CI. Solidity checks additionally need
-Foundry; the compiler/settings are pinned in `contracts/foundry.toml`.
+For Wallet, Provider and platform integrations:
 
-Corepack is required by the commands below. If it is absent, install it with
-`npm install --global corepack` using your Node installation.
+```bash
+npm install @c4roa0/agentpay-protocol
+```
+
+Use the shared helpers to compute protocol hashes, validate messages and consume
+contract ABIs. For example, save this as `example.mjs`:
+
+```js
+import { hashPrivateRequest } from '@c4roa0/agentpay-protocol';
+
+const requestHash = hashPrivateRequest({
+  text: 'Hello, world!',
+  targetLanguage: 'fr',
+});
+
+console.log(requestHash);
+```
+
+Run `node example.mjs`. It prints a request hash: `0x` followed by 64 hexadecimal
+characters. This example does not
+create an order or make a payment. See the [package guide](packages/types/README.md)
+for usage and the [API notes](doc/reference/public-package-api.md) for details.
+You do not need to clone this repository to use the npm package.
+
+If you want to install and use AgentPay rather than develop an integration, start
+with [AgentPay User](https://github.com/c4rO-0/agentpay-user).
+
+## How the pieces fit together
+
+| Component | Responsibility |
+| --- | --- |
+| Safe and Spending Module | Hold funds and enforce bounded payment authorization |
+| Registry | Record qualified service identities; qualification is not a quality guarantee |
+| Factory and per-order Vault | Create escrow accounts and enforce the order's on-chain settlement rules |
+| Authority Controller | Restrict the operations delegated to Settlement |
+| Public package | Share types, hashes, validation helpers, ABIs, schemas and fixtures |
+
+Wallet key storage, Provider service execution, Market accounts and Settlement
+operations belong to separate projects. Read the [architecture](doc/architecture.md)
+for their roles and trust boundaries.
+
+## Develop the protocol
+
+Clone the repository when changing contracts or libraries, or contributing tests
+and documentation. Use Node **22.22.3** and pnpm **10** to match CI. If Corepack is
+missing, install it with `npm install --global corepack` using your Node installation.
 
 ```bash
 git clone https://github.com/c4rO-0/agentpay-protocol.git
@@ -27,60 +68,44 @@ pnpm install --frozen-lockfile
 pnpm test:packages
 ```
 
-The package check builds the workspace, tests public API boundaries, then installs
-packed libraries in a temporary consumer. It needs no wallet, database or RPC
-credentials; dependency downloads may require network access.
+The package checks build the workspace and exercise public interfaces, including
+installation into an independent temporary project. No wallet, database or RPC
+credentials are required.
 
-With Foundry installed, continue with:
+With compatible Foundry installed, run `pnpm test:chain` for contract tests and
+transactions on a disposable Anvil. The compiler settings are in
+`contracts/foundry.toml`. These tests use a Safe-interface fixture; they are not
+production Safe or full-platform acceptance. See [testing](doc/reference/testing.md)
+and the [developer guide](doc/develope.md).
 
-```bash
-pnpm test:chain
-```
+## Find your way around
 
-This runs local contract tests and real transactions on a disposable Anvil. The
-integration uses a Safe-interface fixture and checks bounded payments, replay
-rejection, delivery, release/refund and balances. It is not a production Safe or
-full-platform acceptance test. [Testing details](doc/reference/testing.md).
-
-## Repository map
-
-| Location | Purpose |
+| Location | Contents |
 | --- | --- |
-| `contracts/src/` | Spending Module, Registry, deterministic Factory, per-order Vault and restricted Authority Controller |
-| `packages/types/` | Public types, canonical hashes, ABIs, JSON schemas and shared fixtures |
-| `packages/x402-escrow/` | Payment requirements, commitment and funding-evidence verification; optional facilitator adapters |
-| `packages/x402-reference/` | Historical direct-funding HTTP example; not the native authorization flow |
-| `contracts/scripts/` | Source-bound deployment artifact generation and integrity checks |
-| `scripts/` | Current verification/packaging entries and clearly scoped historical tools |
-| `server/`, `spikes/` | Legacy demo and experimental reference code; not production Settlement |
-| `doc/` | Architecture, integration rules, contribution guidance and dated evidence |
+| `contracts/src/` | Public Solidity contracts |
+| `packages/types/` | Source of the published `@c4roa0/agentpay-protocol` package |
+| `packages/x402-escrow/` | Workspace library for payment verification and facilitator adapters |
+| `contracts/scripts/` | Deployment artifact generation and integrity checks |
+| `scripts/` | Verification and packaging tools, plus labeled historical tools |
+| `doc/` | Specifications, developer guides and verification records |
 
-Read [architecture](doc/architecture.md) for the payment flow and trust boundaries.
-For protocol changes, start with [contributing](doc/reference/CONTRIBUTING.md).
+`packages/x402-reference/`, `server/` and `spikes/` contain historical examples or
+experiments. They are not the production Settlement implementation. Only the core
+package is published to npm; the other workspace packages remain private.
 
-## Integrate and contribute
+## Documentation and contributing
 
-- [Install, test and produce local packages](doc/usage.md)
-- [Developer guide](doc/develope.md) and [protocol design](doc/design.md)
-- [Public package exports](packages/types/README.md) and [contract guide](contracts/README.md)
-- [Documentation catalog](doc/README.md), [progress](progress.md) and [remaining work](doc/TODO.md)
-- [Security reporting](doc/security/SECURITY.md)
+- [Documentation catalog](doc/README.md) — choose a guide by role or task.
+- [Contracts](contracts/README.md) and [protocol design](doc/design.md).
+- [Contributing](doc/reference/CONTRIBUTING.md) and [security reporting](SECURITY.md).
+- [Progress](progress.md) and [TODO](doc/TODO.md) — current development scope.
+- [Publication guide](doc/runbooks/npm-publication.md) — for package maintainers.
 
-Workspace packages remain `private: true` to prevent accidental registry publication.
-Source is MIT licensed; public package naming/distribution and compatibility policy
-are still being finalized. `pnpm artifacts:pack:settlement` creates local consumer
-archives and prints their SHA-256 values; it does not publish or deploy anything.
+## Project status
 
-## Status and limits
+The protocol has not completed an independent security audit. Package availability
+and local test results do not establish readiness for real funds or certify a live
+deployment. Protocol changes must preserve signed meanings and existing order and
+authorization identities unless an explicit migration is designed.
 
-The repository has not completed an independent security audit. Local tests and
-historical fork/deployment records do not authorize real-funds use or certify the
-current source as deployed. Registry qualification verifies service identity/control,
-not service quality. Dispute decisions and scheduling are Settlement responsibilities;
-Vaults enforce their documented on-chain constraints.
-
-Canonical bytes, signed field meanings and existing Order/Policy identities must
-remain stable across maintenance changes. Historical records retain their original
-scope and source identifiers; they are not current installation instructions.
-
-[MIT license](LICENSE) · [Model-facing development instructions](AGENTS.md)
+[MIT license](LICENSE).

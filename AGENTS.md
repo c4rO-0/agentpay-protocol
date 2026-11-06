@@ -80,6 +80,25 @@ private scripts, pre-existing services or operator credentials are available.
 Keep local tests on disposable chains; do not substitute a live deployment when
 local tooling is unavailable. Report the missing prerequisite instead.
 
+## Human-facing documentation review
+
+README files and installation, usage and contributor guides are written for people,
+not as inventories for an AI or as implementation logs. After every documentation
+change, reread the result from its intended reader's perspective before reporting
+completion. Check that:
+
+- The opening explains what this is, who it serves and what the reader can do next.
+- Instructions state prerequisites, copyable steps and expected outcomes without
+  assuming private workspace knowledge or prior conversations.
+- Necessary terminology is introduced where used; API catalogs, historical changes
+  and detailed invariants belong in linked references, not the introduction.
+- Commands, examples, links and version/status claims match the actual product.
+- Repetition and unnecessary caveats do not bury the main action; material limits
+  remain clear and proportionate.
+
+Link and syntax checks do not replace this editorial review. Fix readability issues
+found during the review; report unresolved gaps rather than claiming the guide is ready.
+
 ## Documentation navigation
 
 Use `doc/README.md` to select documents by role and function. Keep current work in
@@ -90,11 +109,11 @@ documentation. Update local links and the catalog when reorganizing documents.
 
 ## Public distribution boundary
 
-Treat the current `@agentpay/types` package and vendored tarballs as temporary
-integration, not a finalized public package/channel. Protocol will be released;
-record distribution assumptions and avoid requiring the parent workspace for
-external consumers. Agree final naming, packaging/versioning and consumer upgrades
-before replacing the mechanism or publishing. Preserve frozen wire/hash identities.
+The approved public core package is `@c4roa0/agentpay-protocol`, maintained in
+`packages/types`. Other workspace packages remain private. Follow
+`doc/runbooks/npm-publication.md` before publishing; source changes alone do not
+authorize registry upload. Existing consumers retain their vendored dependency
+until separately upgraded after publication. Preserve frozen wire/hash identities.
 
 ## Public source preparation — 2026-11-06
 

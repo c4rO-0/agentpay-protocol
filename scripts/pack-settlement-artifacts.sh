@@ -19,7 +19,7 @@ mkdir -p "$output_dir"
 output_dir="$(cd "$output_dir" && pwd)"
 
 cd "$repo_dir"
-"${pnpm_command[@]}" --filter @agentpay/types build
+"${pnpm_command[@]}" --filter @c4roa0/agentpay-protocol build
 "${pnpm_command[@]}" --filter @agentpay/x402-escrow build
 
 for package_dir in packages/types packages/x402-escrow; do
@@ -30,5 +30,5 @@ for package_dir in packages/types packages/x402-escrow; do
 done
 
 sha256sum \
-  "$output_dir/agentpay-types-$types_version.tgz" \
+  "$output_dir/c4roa0-agentpay-protocol-$types_version.tgz" \
   "$output_dir/agentpay-x402-escrow-$escrow_version.tgz"
