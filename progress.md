@@ -1,5 +1,15 @@
 # AgentPay Protocol Progress
 
+## Trusted publishing completed — 2026-11-06
+
+Owner reports GitHub OIDC publication completed and npm publishing access tightened
+to require 2FA and disallow bypass tokens. Public registry confirms latest=0.14.3
+and exposes a provenance attestation. Old Token revocation is not independently
+confirmed. Consumer repositories have not been upgraded; Wallet still references
+its vendored 0.14.1 archive. Next: migrate Wallet to the public npm core and verify
+independent install/build and bounded-operation behavior, then other consumers.
+
+
 ## Trusted publishing prepared — 2026-11-06
 
 Owner configured npm Trusted Publisher; pending validation until the displayed
