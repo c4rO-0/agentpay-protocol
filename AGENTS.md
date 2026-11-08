@@ -124,3 +124,13 @@ Source publication does not authorize npm publication, chain deployment or real 
 Public history starts with a reviewed initial snapshot by owner request;
 do not restore the old history by merging a stale clone. Preserve original hashes in
 historical deployment records; they do not identify the new snapshot's deployed code.
+
+## Tag-triggered npm releases
+
+Package version `X.Y.Z` is released by pushing tag `vX.Y.Z` at the exact reviewed
+source commit. `.github/workflows/publish.yml` validates this match, verifies the
+package, publishes through OIDC and checks registry integrity. Pushing a release
+tag is a publication action and needs maintainer authorization; ordinary branch
+pushes do not publish. Never move an existing release tag. Verify registry state
+before rerunning a failed publication. The `npm-publish` environment must allow
+release tags (for example `v*`), not only the main branch.

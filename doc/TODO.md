@@ -1,5 +1,11 @@
 # AgentPay Protocol TODO
 
+## Tag-triggered publication
+
+- [x] Use matching `vX.Y.Z` tags for npm publication; retain verification gates.
+- [x] Owner confirmed release tags allowed in the GitHub `npm-publish` environment.
+- [ ] Verify the first tag-triggered OIDC publication and registry integrity.
+
 ## CI package rename follow-up
 
 - [x] Fix chain-job dependency build and verify from a clean checkout without dist files.

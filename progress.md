@@ -1,5 +1,15 @@
 # AgentPay Protocol Progress
 
+## Tag-triggered publication — 2026-11-08
+
+Wallet, Protocol and User release workflows now run on pushed `vX.Y.Z` tags.
+Each validates its package version, runs existing verification, publishes with
+OIDC and checks registry integrity. Branch pushes do not publish. No tag was
+pushed or npm version published for this workflow change. Owner confirmed `v*` tags allowed in the GitHub
+`npm-publish` environment; npm trust fields remain unchanged. YAML/shell checks and six executable tag/version guard cases passed
+per repository (matching version, mismatch, branch, prerelease, leading zero and
+newline rejection). Actual GitHub/OIDC execution remains pending.
+
 ## Trusted publishing completed — 2026-11-06
 
 Owner reports GitHub OIDC publication completed and npm publishing access tightened

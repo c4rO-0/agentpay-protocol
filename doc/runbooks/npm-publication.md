@@ -1,78 +1,62 @@
-# Publish the public Protocol core
+# Publish Protocol to npm
 
-Use the **Publish Protocol to npm** GitHub Action to publish
-`@c4roa0/agentpay-protocol`. It uses npm Trusted Publishing, so no npm Token or
-GitHub secret is required. Only the core in `packages/types` is published.
+Push a reviewed `vX.Y.Z` tag to publish `@c4roa0/agentpay-protocol` through GitHub
+Actions. The tag must match `packages/types/package.json`. Ordinary branch pushes do not publish.
+Only the public core in `packages/types` is published. Consumer upgrades remain
+separate; publishing Protocol does not update their installed dependencies.
 
 ## One-time setup
 
-On the GitHub repository, open **Settings → Environments** and create
-`npm-publish`. Under deployment branches/tags, allow only the `main` branch.
-Environment names must match exactly. Add required reviewers if your team needs
-an approval gate; creating an environment alone does not add approval protection.
+In GitHub **Settings → Environments → npm-publish**, allow deployment from tags
+matching `v*`. A rule allowing only the `main` branch will block tag releases.
+Keep required reviewer approval if desired. Restrict creation, update and deletion
+of release tags to maintainers through repository rules.
 
-On the npm package's **Settings → Trusted Publisher**, configure:
+On npm, configure this package's Trusted Publisher:
 
 | Field | Value |
 | --- | --- |
 | Publisher | GitHub Actions |
-| Organization or user | `c4rO-0` |
+| Organization/user | `c4rO-0` |
 | Repository | `agentpay-protocol` |
 | Workflow filename | `publish.yml` |
 | Environment name | `npm-publish` |
-| Allowed actions | Allow `npm publish`; separate dist-tag management is not needed |
+| Allowed action | Direct publishing |
 
-The workflow must be pushed before it can run. New npm connections must complete
-an initial successful publication within the deadline shown in npm Settings.
-See [npm Trusted Publishing](https://docs.npmjs.com/trusted-publishers/).
+Existing matching npm trust settings need no change. The first successful OIDC
+publication validates a pending connection; a local token upload does not.
+No stored npm token is needed by this workflow.
 
 ## Release a version
 
-1. Update `packages/types/package.json` and its changelog with a new stable version.
-   Review the code, package contents and compatibility impact. Push reviewed changes
-   to `main`; this runs CI but does **not** publish anything.
-2. In GitHub, open **Actions → Publish Protocol to npm → Run workflow**.
-3. Choose `main` and enter the exact package version, such as `0.14.3`.
-4. Run the workflow and, if configured, approve its environment deployment.
-
-The workflow installs from the lockfile, runs package checks and the local Anvil
-payment lifecycle, packs the core, then publishes that archive. Any check failure
-blocks upload. Node and npm support OIDC; publishing runs on a GitHub-hosted runner.
-No production chain or deployed platform services are contacted by these tests.
-
-Success ends with **Verify public registry integrity**. npm also generates package
-provenance for this public repository. Confirm the version on npm and that the
-Trusted Publisher changes from pending to validated after the first release.
-Then select **Require two-factor authentication and disallow bypass 2fa tokens**
-in npm Publishing access and revoke the old publishing Token if no longer needed.
-
-## If a run fails
-
-- Before upload: fix the error and rerun the workflow for the reviewed commit.
-- After upload: check the logs and public version before rerunning. npm can accept
-  a publication before the version becomes queryable; verification retries for this
-  reason. Do not publish again or bump versions merely to bypass a query delay.
-- Existing version: npm versions are immutable. A repeat upload must fail; inspect
-  the existing version rather than overwrite it.
-- Authentication: verify all npm fields match the table, direct publishing is allowed,
-  and the connection has not expired. Do not add a token as a silent fallback.
-
-To repeat only the public integrity check with the original built archive:
+1. Update `packages/types/package.json` and the changelog. Review code, documentation, dependencies
+   and package contents; complete the repository's verification steps.
+2. Commit and push the reviewed source to main, including the tag-triggered workflow.
+3. Create an annotated tag at that exact commit and push it. Replace `X.Y.Z` and
+   `REVIEWED_COMMIT` below with the release version and reviewed commit:
 
 ```sh
-node scripts/verify-npm-release.mjs artifacts/npm/c4roa0-agentpay-protocol-0.14.3.tgz 0.14.3
+git tag -a vX.Y.Z REVIEWED_COMMIT -m "Release X.Y.Z"
+git push origin vX.Y.Z
 ```
 
-## Inspect an archive locally
+Pushing the tag starts **Publish Protocol to npm** automatically. There is no version
+input or separate Run workflow step. If the environment requires approval, approve
+that deployment in GitHub. The workflow checks the tag against the manifest before
+building, runs the existing verification gates, tests/packs the archive, publishes
+with OIDC and checks public registry integrity. It builds the tagged source, even
+if main advances. No production service or participant Wallet is upgraded.
 
-```sh
-pnpm install --frozen-lockfile
-pnpm test:packages
-bash scripts/prepare-npm-release.sh
-```
+## Verify or recover a publication
 
-The script prints the file inventory and SHA-256 without publishing. The archive
-contains compiled ESM/declarations, public schemas, conformance fixtures, README,
-changelog and MIT license. Deployment artifacts, services and historical records
-are excluded. A package release does not upgrade consumers or saved Policies/Orders.
-Verify each consumer upgrade separately.
+Check the run's **Verify public registry integrity** result and the package version
+on npm. Record the tag, source commit and result in progress. Do not claim success
+from tag creation alone. Actual OIDC validation requires the GitHub run.
+
+If a run fails before upload, investigate before rerunning. If source needs a fix,
+use a new version/tag; never move an existing release tag. If upload may have
+succeeded, check registry state and archive integrity before rerunning; npm versions
+are immutable and an already-published version must not be uploaded again.
+
+Publication is not participant upgrade acceptance, cross-platform verification or
+real-funds approval.
