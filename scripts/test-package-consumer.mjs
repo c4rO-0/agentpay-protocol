@@ -1,5 +1,5 @@
 // Exercise the actual packed public interface from an independent temporary project.
-import { mkdtemp, readFile, writeFile, rm, copyFile } from "node:fs/promises";
+import { mkdtemp, readFile, writeFile, rm, copyFile, mkdir } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -58,6 +58,28 @@ try {
     join(dir, "consumer.mjs"),
   );
   run(process.execPath, ["consumer.mjs"], dir);
+
+  // Also test the distributed verifier against its declared registry dependency.
+  // The candidate-types override above deliberately tests a different boundary;
+  // it must not hide a broken public dependency or a stale workspace symlink.
+  const registryDir = join(dir, "registry-consumer");
+  await mkdir(registryDir);
+  const verifier = JSON.parse(await readFile(join(root, "packages/x402-escrow/package.json"), "utf8"));
+  const core = JSON.parse(await readFile(join(root, "packages/types/package.json"), "utf8"));
+  await writeFile(join(registryDir, "package.json"), JSON.stringify({
+    private: true,
+    type: "module",
+    dependencies: {
+      [verifier.name]: "file:" + packages.find(p => p.name === verifier.name).file,
+      "@c4roa0/agentpay-protocol": verifier.dependencies["@c4roa0/agentpay-protocol"],
+      viem: core.dependencies.viem,
+    },
+  }));
+  run("pnpm", ["--ignore-workspace", "install", "--ignore-scripts",
+    ...(process.env.PROTOCOL_TEST_OFFLINE === "1" ? ["--offline"] : [])], registryDir);
+  await copyFile(join(root, "packages/x402-escrow/test/core.test.mjs"), join(registryDir, "core.test.mjs"));
+  run(process.execPath, ["--test", "core.test.mjs"], registryDir);
+
 } finally {
   await rm(dir, { recursive: true, force: true });
 }

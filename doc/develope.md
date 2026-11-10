@@ -74,3 +74,15 @@ runtime logs. Public non-secret deployment records need review and exact provena
 
 Read [contribution guidance](reference/CONTRIBUTING.md) and use
 [private security reporting](security/SECURITY.md) for vulnerabilities.
+
+## Verifier dependency verification
+
+`pnpm test:packages` runs the independent package-consumer check. It covers both
+locally packed candidate types and a clean verifier installation using its declared
+public npm Protocol version, without workspace overrides. Native escrow cases use
+fixtures shipped by the installed Protocol package. Optional CDP adapter coverage
+is a separate test in the workspace, where its SDK peer dependencies are installed;
+passing native installation does not establish a standalone CDP installation.
+
+Chain CI explicitly builds local types and the private verifier before ABI and
+Anvil checks. The verifier's npm dependency does not build local types implicitly.

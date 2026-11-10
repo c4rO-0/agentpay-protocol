@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.1 — 2026-11-09
+
+- Repack the private verifier with an exact public Protocol 0.14.3 dependency.
+- Preserve verification behavior and wire formats; this is not an npm publication.
+
 ## 0.4.0 - 2026-09-17
 
 - Rebuild against `@agentpay/types` 0.4.0. Payment verification and wire

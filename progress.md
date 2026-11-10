@@ -1,5 +1,20 @@
 # AgentPay Protocol Progress
 
+## Dependency review fixes — 2026-11-10
+
+CI now explicitly builds local types and the verifier before chain checks.
+The independent consumer script also installs the verifier against its declared
+public npm Protocol dependency in a fresh temporary project. Nine native behavior
+cases passed there; the existing CDP adapter case remains separate and passed in
+the workspace with its SDK peers installed. Frozen dependency installation removed
+the stale local types symlink. No Forge run, publication or chain writes occurred.
+
+## Private verifier dependency repack — 2026-11-09
+
+Private x402-escrow 0.4.1 pins the public Protocol 0.14.3 instead of a workspace
+reference. Types/core version remains unchanged. Built artifact and verifier
+checks passed; no npm publication, release tag, contract or deployment change.
+
 ## Tag-triggered publication — 2026-11-08
 
 Wallet, Protocol and User release workflows now run on pushed `vX.Y.Z` tags.

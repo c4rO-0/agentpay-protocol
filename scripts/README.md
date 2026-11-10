@@ -4,7 +4,7 @@
 
 | Entry | Purpose |
 | --- | --- |
-| `test-package-consumer.mjs` | Pack libraries and verify an independent temporary consumer |
+| `test-package-consumer.mjs` | Verify independent candidate-package and public-registry verifier consumers |
 | `test-native-lifecycle.mjs` | Fresh local Anvil: bounded funding, replay, release/refund and balances |
 | `test/controller-artifact.test.mjs` | Public Controller ABI matches the compiled contract |
 | `fixtures/package-consumer.mjs` | Consumer assertions for the package runner |

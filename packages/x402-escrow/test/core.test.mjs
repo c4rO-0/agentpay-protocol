@@ -6,14 +6,13 @@ import {
   hashAgentPayCommitment, verifyAgentPayPayment,
   FundingIdempotencyRegistry, buildPaymentRequired, validatePaymentRequired,
   validateSettlementEvidence, validateVaultTerms, waitForVaultBalance,
-} from "../dist/index.js";
+} from "@agentpay/x402-escrow";
 import { privateKeyToAccount } from "viem/accounts";
-import { MockX402Facilitator } from "../dist/mock.js";
-import { CdpX402Facilitator } from "../dist/cdp.js";
+import { MockX402Facilitator } from "@agentpay/x402-escrow/mock";
 
-const terms = JSON.parse(readFileSync(new URL("../../types/fixtures/x402-escrow-v1/order-terms.json", import.meta.url)));
-const records = JSON.parse(readFileSync(new URL("../../types/fixtures/x402-escrow-v1/records.json", import.meta.url)));
-const agentPayRecords = JSON.parse(readFileSync(new URL("../../types/fixtures/agentpay-safe-module-v1/records.json", import.meta.url)));
+const terms = JSON.parse(readFileSync(new URL("../fixtures/x402-escrow-v1/order-terms.json", import.meta.resolve("@c4roa0/agentpay-protocol"))));
+const records = JSON.parse(readFileSync(new URL("../fixtures/x402-escrow-v1/records.json", import.meta.resolve("@c4roa0/agentpay-protocol"))));
+const agentPayRecords = JSON.parse(readFileSync(new URL("../fixtures/agentpay-safe-module-v1/records.json", import.meta.resolve("@c4roa0/agentpay-protocol"))));
 const order = {
   terms,
   termsHash: records.paymentRequired.extensions["agentpay-order"].termsHash,
@@ -101,16 +100,6 @@ test("validates chain evidence and rejects every payment mismatch", () => {
   ];
   for (const [message, change] of cases) assert.throws(() => validateSettlementEvidence({ ...records.evidence, ...change }, order), new RegExp(message));
   assert.throws(() => validateSettlementEvidence({ ...records.evidence, transfer: undefined }, order), /missing/);
-});
-
-test("CDP adapter normalizes provider-specific responses", async () => {
-  const adapter = CdpX402Facilitator.fromClient({
-    async getSupported() { return { kinds: [] }; },
-    async verify() { return { isValid: true, payer: terms.buyer }; },
-    async settle() { return { success: true, payer: terms.buyer, transaction: records.evidence.transactionHash, network: "eip155:8453" }; },
-  });
-  assert.deepEqual(await adapter.verify({}, records.paymentRequired), { isValid: true, payer: terms.buyer, invalidReason: undefined });
-  assert.equal((await adapter.settle({}, records.paymentRequired)).transactionHash, records.evidence.transactionHash);
 });
 
 test("verifies immutable Vault terms before activation", () => {

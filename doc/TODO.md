@@ -1,5 +1,9 @@
 # AgentPay Protocol TODO
 
+- [x] Resolve dependency-migration review findings: explicit builds/isolated consumer checks (Protocol), and public package import in the preparation entry (Deploy).
+
+- [x] Prepare private x402-escrow 0.4.1 with exact public Protocol 0.14.3 dependency for independent consumer installation; no npm release is authorized.
+
 ## Tag-triggered publication
 
 - [x] Use matching `vX.Y.Z` tags for npm publication; retain verification gates.
