@@ -1,5 +1,9 @@
 # AgentPay Protocol TODO
 
+- [x] Implement the approved public configuration/network portability source loop; see current progress and local reference/runbook for scoped test results.
+- [x] Real offline artifact build/check and unsigned-plan User/Provider validation passed (2026-11-14, bundle b4993e2c3b7de5b350d8).
+- [ ] Complete source review and coordinated release/rollout as applicable; target-network/live transaction acceptance remains separate.
+
 - [x] Resolve dependency-migration review findings: explicit builds/isolated consumer checks (Protocol), and public package import in the preparation entry (Deploy).
 
 - [x] Prepare private x402-escrow 0.4.1 with exact public Protocol 0.14.3 dependency for independent consumer installation; no npm release is authorized.

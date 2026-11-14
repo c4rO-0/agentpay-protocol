@@ -19,6 +19,8 @@ import {
   verifyAbiSubset,
 } from "./deployment-artifact-integrity.mjs";
 import {
+  agentPaySpendingModuleAbi,
+  skillRegistryAbi,
   orderEscrowVaultAbi,
   agentPayEscrowFactoryAbi,
   settlementAuthorityControllerAbi,
@@ -98,6 +100,8 @@ const settings = {
   evmVersion: setting("evm_version"),
   outputSelection: Object.fromEntries(
     [
+      "AgentPaySpendingModule",
+      "SkillRegistry",
       "OrderEscrowVault",
       "AgentPayEscrowFactory",
       "SettlementAuthorityController",
@@ -141,6 +145,8 @@ async function addSources(directory, prefix) {
 }
 await addSources(join(contractsDir, "src"), "src/");
 const required = [
+  "src/AgentPaySpendingModule.sol",
+  "src/SkillRegistry.sol",
   "src/OrderEscrowVault.sol",
   "src/AgentPayEscrowFactory.sol",
   "src/SettlementAuthorityController.sol",
@@ -161,11 +167,15 @@ const bundleId = bundleDigest.slice(0, 20);
 const directory = join(targetRoot, bundleId);
 const pointer = join(targetRoot, "latest.json");
 const abiByName = {
+  AgentPaySpendingModule: agentPaySpendingModuleAbi,
+  SkillRegistry: skillRegistryAbi,
   OrderEscrowVault: orderEscrowVaultAbi,
   AgentPayEscrowFactory: agentPayEscrowFactoryAbi,
   SettlementAuthorityController: settlementAuthorityControllerAbi,
 };
 const selected = [
+  ["AgentPaySpendingModule.sol", "AgentPaySpendingModule"],
+  ["SkillRegistry.sol", "SkillRegistry"],
   ["OrderEscrowVault.sol", "OrderEscrowVault"],
   ["AgentPayEscrowFactory.sol", "AgentPayEscrowFactory"],
   ["SettlementAuthorityController.sol", "SettlementAuthorityController"],

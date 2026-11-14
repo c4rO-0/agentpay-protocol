@@ -1,5 +1,10 @@
 # AgentPay Protocol Progress
 
+## Complete native artifact bundle — 2026-11-14
+
+Source-bound artifact generation now includes Spending Module and Registry alongside Factory, Vault and Controller. ABI/contract business rules and npm package version are unchanged. Integrity helper tests pass. Operator offline Docker compiler build/check passed with bundle `b4993e2c3b7de5b350d8`; the downstream unsigned plan passed User/Provider validation. No new contract deployment is claimed.
+
+
 ## Dependency review fixes — 2026-11-10
 
 CI now explicitly builds local types and the verifier before chain checks.

@@ -18,7 +18,7 @@ package before this command so ABI conformance can be checked.
 It writes a content-addressed bundle under the ignored
 `contracts/artifacts/deployments/` directory by default; set
 `AGENTPAY_CONTRACT_ARTIFACT_DIR` to choose an operator output directory. The bundle contains fresh
-Vault, Factory and Controller ABI/bytecode, source hashes, compiler hash and
+Vault, Factory, Spending Module, Registry and Controller ABI/bytecode, source hashes, compiler hash and
 artifact hashes and creation/runtime-template Keccak hashes. Runtime templates
 with immutable references are explicitly labeled; their final deployed code hash
 requires the deployment addresses. The eventual Vault clone code hash also
